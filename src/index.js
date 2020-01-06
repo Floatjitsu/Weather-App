@@ -2,16 +2,61 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import searchLogo from './search.svg'
-const fs = require('fs');
+const request = require('request');
+
+const getCurrentCityOfUser = new Promise((resolve, reject) => {
+	request('https://freegeoip.app/json/', (error, response, body) => {
+		if (!error) {
+			resolve(JSON.parse(body).city);
+		} else {
+			reject('ERR' + error);
+		}
+	});
+});
 
 class SearchBar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedCity: ""
+		}
+	}
+
+	componentDidMount() {
+		this._asyncRequest = getCurrentCityOfUser.then(result => {
+			this._asyncRequest = null;
+			this.setState({selectedCity: result});
+		});
+	}
+
+	componentWillUnmount() {
+	    if (this._asyncRequest) {
+	      this._asyncRequest.cancel();
+	    }
+  	}
+
+	handleChange(event) {
+		this.setState({
+			selectedCity: event.target.value
+		});
+	}
+
 	render() {
-		return (
-			<div>
-				<input type='image' src={searchLogo} width="25" height="25"/>
-				<input type='text' class='searchBar'/>
-			</div>
-		);
+		if (this.state.currentCityOfUser === "") {
+			return (
+    			<div>
+    				<input type='image' alt='search logo' src={searchLogo} width="25" height="25"/>
+    				<input type='text' className='searchBar'/>
+    			</div>
+    		);
+	    } else {
+			return (
+    			<div>
+    				<input type='image' alt='search logo' src={searchLogo} width="25" height="25"/>
+    				<input type='text' className='searchBar' defaultValue={this.state.selectedCity} />
+    			</div>
+    		);
+	    }
 	}
 }
 
