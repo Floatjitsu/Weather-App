@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import searchLogo from './search.svg'
 import crossfilter from 'crossfilter2';
+import AutocompleteCity from './AutocompleteCity'
 const request = require('request');
 const cities = require('./cities.json');
 
@@ -10,13 +11,6 @@ const citiesFilter = crossfilter(cities);
 const cityNameDimension = citiesFilter.dimension((city) => {
 	return city.name || "";
 });
-
-const search = 'Au';
-
-let x = cityNameDimension.filter((d) => {
-	return d.startsWith(search);
-}).top(Infinity);
-console.log(x);
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {
@@ -50,6 +44,10 @@ class SearchBar extends React.Component {
   	}
 
 	handleChange(event) {
+		let cityFilter = cityNameDimension.filter((city) => {
+			return city.startsWith(event.target.value);
+		}).top(Infinity);
+
 		this.setState({
 			selectedCity: event.target.value
 		});
@@ -67,7 +65,8 @@ class SearchBar extends React.Component {
 			return (
     			<div>
     				<input type='image' alt='search logo' src={searchLogo} width="25" height="25"/>
-    				<input type='text' className='searchBar' defaultValue={this.state.selectedCity} />
+    				<input type='text' className='searchBar' defaultValue={this.state.selectedCity} onChange={this.handleChange.bind(this)} />
+					<AutocompleteCity value={'test'} />
     			</div>
     		);
 	    }
