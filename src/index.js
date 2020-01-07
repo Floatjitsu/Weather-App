@@ -2,14 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import searchLogo from './search.svg'
+import crossfilter from 'crossfilter2';
 const request = require('request');
+const cities = require('./cities.json');
+
+const citiesFilter = crossfilter(cities);
+const cityNameDimension = citiesFilter.dimension((city) => {
+	return city.name || "";
+});
+
+const search = 'Au';
+
+let x = cityNameDimension.filter((d) => {
+	return d.startsWith(search);
+}).top(Infinity);
+console.log(x);
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {
 		if (!error) {
 			resolve(JSON.parse(body).city);
 		} else {
-			reject('ERR' + error);
+			reject(error);
 		}
 	});
 });
@@ -23,8 +37,8 @@ class SearchBar extends React.Component {
 	}
 
 	componentDidMount() {
-		this._asyncRequest = getCurrentCityOfUser.then(result => {
-			this._asyncRequest = null;
+		getCurrentCityOfUser.then(result => {
+			//this._asyncRequest = null;
 			this.setState({selectedCity: result});
 		});
 	}
