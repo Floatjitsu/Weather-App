@@ -2,25 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import searchLogo from './search.svg'
-import crossfilter from 'crossfilter2';
 import AutocompleteCity from './AutocompleteCity'
 const request = require('request');
-const cities = require('./cities.json');
-
-const citiesFilter = crossfilter(cities);
-const cityNameDimension = citiesFilter.dimension((city) => {
-	return city.name || "";
-});
-
-const getCurrentCityOfUser = new Promise((resolve, reject) => {
-	request('https://freegeoip.app/json/', (error, response, body) => {
-		if (!error) {
-			resolve(JSON.parse(body).city);
-		} else {
-			reject(error);
-		}
-	});
-});
 
 class SearchBar extends React.Component {
 	constructor(props) {
@@ -30,46 +13,20 @@ class SearchBar extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		getCurrentCityOfUser.then(result => {
-			//this._asyncRequest = null;
-			this.setState({selectedCity: result});
-		});
-	}
-
-	componentWillUnmount() {
-	    if (this._asyncRequest) {
-	      this._asyncRequest.cancel();
-	    }
-  	}
-
-	handleChange(event) {
-		let cityFilter = cityNameDimension.filter((city) => {
-			return city.startsWith(event.target.value);
-		}).top(Infinity);
-
-		this.setState({
-			selectedCity: event.target.value
-		});
-	}
+	// handleChange(event) {
+	// 	let cityFilter = cityNameDimension.filter((city) => {
+	// 		return city.startsWith(event.target.value);
+	// 	}).top(Infinity);
+	//
+	// 	this.setState({
+	// 		selectedCity: event.target.value
+	// 	});
+	// }
 
 	render() {
-		if (this.state.currentCityOfUser === "") {
-			return (
-    			<div>
-    				<input type='image' alt='search logo' src={searchLogo} width="25" height="25"/>
-    				<input type='text' className='searchBar'/>
-    			</div>
-    		);
-	    } else {
-			return (
-    			<div>
-    				<input type='image' alt='search logo' src={searchLogo} width="25" height="25"/>
-    				<input type='text' className='searchBar' defaultValue={this.state.selectedCity} onChange={this.handleChange.bind(this)} />
-					<AutocompleteCity value={'test'} />
-    			</div>
-    		);
-	    }
+		return (
+			<AutocompleteCity />
+		);
 	}
 }
 
