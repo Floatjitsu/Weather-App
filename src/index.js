@@ -3,29 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import searchLogo from './search.svg'
 import AutocompleteCity from './AutocompleteCity'
-const request = require('request');
 
 class SearchBar extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedCity: ""
-		}
-	}
-
-	// handleChange(event) {
-	// 	let cityFilter = cityNameDimension.filter((city) => {
-	// 		return city.startsWith(event.target.value);
-	// 	}).top(Infinity);
-	//
-	// 	this.setState({
-	// 		selectedCity: event.target.value
-	// 	});
-	// }
-
 	render() {
 		return (
-			<AutocompleteCity />
+			<div className='searchBarWrapper'>
+				<AutocompleteCity />
+				<img src={searchLogo} className='searchLogo' />
+			</div>
 		);
 	}
 }

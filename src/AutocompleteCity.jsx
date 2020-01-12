@@ -1,19 +1,21 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import searchLogo from './search.svg'
 import crossfilter from 'crossfilter2';
 const cities = require('./cities.json');
 const request = require('request');
 
 const citiesFilter = crossfilter(cities);
 const cityNameDimension = citiesFilter.dimension((city) => {
-	return city.name || '';
+	return decodeURI(city.name) || '';
 });
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {
 		if (!error) {
-			resolve(JSON.parse(body).city);
+			const result = JSON.parse(body);
+			resolve(result.city + ', ' + result.region_name + ', ' + result.country_name);
 		} else {
 			reject(error);
 		}
@@ -25,12 +27,37 @@ class AutocompleteCity extends React.Component {
 		super(props);
 		this.state = {
 			selectedCity: '',
-			cities: ['TestCity1', 'TestCity2']
+			cityAutocompleteOptions: ['Type in city...']
 		}
 	}
 
-	onTagsChange(event, value, reason) {
-		//this.state.cities.push('X');
+	clearAutocompleteOptions() {
+		this.setState({
+			cityAutocompleteOptions: []
+		});
+	}
+
+	getCitiesStartsWithValue(value) {
+		return cityNameDimension.filter((city) => {
+			return city.startsWith(value);
+		}).top(20);
+	}
+
+	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'
+	// Example: London, England, United Kingdom
+	getAutocompleteCitiesInOutputFormat(cities) {
+		return cities.map(cityObject => {
+			return cityObject.name + ', ' + cityObject.subcountry + ', ' + cityObject.country;
+		});
+	}
+
+	onInputChange(event, value, reason) {
+		this.clearAutocompleteOptions();
+		const cityFilter = this.getCitiesStartsWithValue(value);
+		this.setState({
+			selectedCity: value,
+			cityAutocompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
+		});
 	}
 
 	componentDidMount() {
@@ -52,7 +79,8 @@ class AutocompleteCity extends React.Component {
 				<div className='searchBar'>
 					<Autocomplete
 						id='autocomplete-city'
-						onInputChange={this.onTagsChange.bind(this)}
+						onInputChange={this.onInputChange.bind(this)}
+						options={this.state.cityAutocompleteOptions}
 						renderInput={params => (
 							<TextField {...params} label='City' variant='outlined' fullWidth />
 						)}
@@ -64,8 +92,8 @@ class AutocompleteCity extends React.Component {
 				<div className='searchBar'>
 					<Autocomplete
 						id='autocomplete-city'
-						onInputChange={this.onTagsChange.bind(this)}
-						options={this.state.cities}
+						onInputChange={this.onInputChange.bind(this)}
+						options={this.state.cityAutocompleteOptions}
 						value={this.state.selectedCity}
 						renderInput={params => (
 							<TextField {...params} label='City' variant='outlined' fullWidth />
