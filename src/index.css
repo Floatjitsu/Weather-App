@@ -4,11 +4,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.searchBarWrapper {
+.app {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
-
 }
 
 .searchBar {
@@ -25,7 +24,8 @@ body {
     vertical-align: middle;
 }
 
-.TextField {
-    font-family: 'Open Sans', sans-serif;
+.weatherComponent {
+    text-align: center;
     font-size: 50px;
+    font-family: 'Open Sans', sans-serif;
 }

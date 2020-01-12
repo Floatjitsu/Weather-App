@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import searchLogo from './search.svg'
-import AutocompleteCity from './AutocompleteCity'
+import WeatherComponent from './WeatherComponent';
+import SearchBar from './SearchBar';
 
-class SearchBar extends React.Component {
+class App extends React.Component {
 	render() {
 		return (
-			<div className='searchBarWrapper'>
-				<AutocompleteCity />
-				<input type='image' src={searchLogo} className='searchLogo' alt='Search Logo' />
+			<div className='app'>
+				<SearchBar />
+				<WeatherComponent />
 			</div>
 		);
 	}
 }
 
 ReactDOM.render(
-  <SearchBar />,
+  <App />,
   document.getElementById('root')
 );
 

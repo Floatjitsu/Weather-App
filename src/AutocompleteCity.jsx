@@ -2,7 +2,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import crossfilter from 'crossfilter2';
-import { makeStyles } from '@material-ui/core/styles';
 const cities = require('./cities.json');
 const request = require('request');
 
