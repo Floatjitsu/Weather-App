@@ -9,7 +9,7 @@ class App extends React.Component {
 		return (
 			<div className='app'>
 				<SearchBar />
-				<WeatherComponent />
+				<WeatherComponent value={'35'} />
 			</div>
 		);
 	}

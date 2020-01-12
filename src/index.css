@@ -8,20 +8,24 @@ body {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
+    width: 100%;
 }
 
-.searchBar {
-    width: 20%;
-    display: inline-block;
-    vertical-align: middle;
+.autoCompleteContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.autoComplete {
+    width: 25%;
+    margin-right: 1%;
 }
 
 .searchLogo {
-    width: 25px;
-    height: 25px;
-    padding-left: 10px;
+    /* padding-top: 10px;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle; */
 }
 
 .weatherComponent {

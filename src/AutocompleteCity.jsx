@@ -2,6 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import crossfilter from 'crossfilter2';
+import Fab from '@material-ui/core/Fab';
+import SearchIcon from '@material-ui/icons/Search';
+import searchLogo from './search.svg';
+import WeatherComponent from './WeatherComponent'
 const cities = require('./cities.json');
 const request = require('request');
 
@@ -59,6 +63,13 @@ class AutocompleteCity extends React.Component {
 		});
 	}
 
+	onSearchButtonClick(event) {
+		const cityName = this.state.selectedCity.split(',')[0];
+		return (
+			<WeatherComponent value={cityName} />
+		);
+	}
+
 	componentDidMount() {
 		getCurrentCityOfUser.then(result => {
 			this._asyncRequest = null;
@@ -75,7 +86,7 @@ class AutocompleteCity extends React.Component {
 	render() {
 		if (this.state.selectedCity === null) {
 			return (
-				<div className='searchBar'>
+				<div className='autoCompleteContainer'>
 					<Autocomplete
 						id='autocomplete-city'
 						onInputChange={this.onInputChange.bind(this)}
@@ -84,24 +95,33 @@ class AutocompleteCity extends React.Component {
 							<TextField {...params} label='City' variant='outlined' fullWidth />
 						)}
 					/>
+					<Fab color="primary" aria-label="add">
+						<SearchIcon />
+				    </Fab>
 				</div>
 			);
 		} else {
 			return (
-				<div className='searchBar'>
-					<Autocomplete
-						id='autocomplete-city'
-						onInputChange={this.onInputChange.bind(this)}
-						options={this.state.cityAutocompleteOptions}
-						value={this.state.selectedCity}
-						renderInput={params => (
-							<TextField {...params} label='City' variant='outlined' fullWidth/>
-						)}
-					/>
+				<div className='autoCompleteContainer'>
+					<div className='autoComplete'>
+						<Autocomplete
+							id='autocomplete-city'
+							onInputChange={this.onInputChange.bind(this)}
+							options={this.state.cityAutocompleteOptions}
+							value={this.state.selectedCity}
+							renderInput={params => (
+								<TextField {...params} label='City' variant='outlined' fullWidth/>
+							)}
+						/>
+					</div>
+					<div className='searchLogo'>
+						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+							<SearchIcon />
+						</Fab>
+					</div>
 				</div>
 			);
 		}
-
 	}
 }
 

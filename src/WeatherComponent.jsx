@@ -1,10 +1,14 @@
 import React from 'react';
 
 class WeatherComponent extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return (
 			<div className='weatherComponent'>
-				<p>35</p>
+				<p>{this.props.value}</p>
 			</div>
 		);
 	}
