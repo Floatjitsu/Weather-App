@@ -1,8 +1,8 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import searchLogo from './search.svg'
 import crossfilter from 'crossfilter2';
+import { makeStyles } from '@material-ui/core/styles';
 const cities = require('./cities.json');
 const request = require('request');
 
@@ -96,7 +96,7 @@ class AutocompleteCity extends React.Component {
 						options={this.state.cityAutocompleteOptions}
 						value={this.state.selectedCity}
 						renderInput={params => (
-							<TextField {...params} label='City' variant='outlined' fullWidth />
+							<TextField {...params} label='City' variant='outlined' fullWidth/>
 						)}
 					/>
 				</div>

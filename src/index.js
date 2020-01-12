@@ -9,7 +9,7 @@ class SearchBar extends React.Component {
 		return (
 			<div className='searchBarWrapper'>
 				<AutocompleteCity />
-				<img src={searchLogo} className='searchLogo' />
+				<input type='image' src={searchLogo} className='searchLogo' alt='Search Logo' />
 			</div>
 		);
 	}
