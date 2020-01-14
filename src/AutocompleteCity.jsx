@@ -4,8 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import crossfilter from 'crossfilter2';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
-import searchLogo from './search.svg';
-import WeatherComponent from './WeatherComponent'
+import WeatherComponent from './WeatherComponent';
 const cities = require('./cities.json');
 const request = require('request');
 
@@ -65,9 +64,9 @@ class AutocompleteCity extends React.Component {
 
 	onSearchButtonClick(event) {
 		const cityName = this.state.selectedCity.split(',')[0];
-		return (
-			<WeatherComponent value={cityName} />
-		);
+		this.setState({
+			searchedCity: cityName
+		});
 	}
 
 	componentDidMount() {
@@ -87,17 +86,24 @@ class AutocompleteCity extends React.Component {
 		if (this.state.selectedCity === null) {
 			return (
 				<div className='autoCompleteContainer'>
-					<Autocomplete
-						id='autocomplete-city'
-						onInputChange={this.onInputChange.bind(this)}
-						options={this.state.cityAutocompleteOptions}
-						renderInput={params => (
-							<TextField {...params} label='City' variant='outlined' fullWidth />
-						)}
-					/>
-					<Fab color="primary" aria-label="add">
-						<SearchIcon />
-				    </Fab>
+					<div className='autoComplete'>
+						<Autocomplete
+							id='autocomplete-city'
+							onInputChange={this.onInputChange.bind(this)}
+							options={this.state.cityAutocompleteOptions}
+							renderInput={params => (
+								<TextField {...params} label='City' variant='outlined' fullWidth/>
+							)}
+						/>
+					</div>
+					<div className='searchLogo'>
+						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+							<SearchIcon />
+						</Fab>
+					</div>
+					<div className='weatherComponent'>
+						<WeatherComponent value={this.state.searchedCity}/>
+					</div>
 				</div>
 			);
 		} else {
@@ -112,12 +118,16 @@ class AutocompleteCity extends React.Component {
 							renderInput={params => (
 								<TextField {...params} label='City' variant='outlined' fullWidth/>
 							)}
-						/>
+						>
+						</Autocomplete>
 					</div>
 					<div className='searchLogo'>
 						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
 							<SearchIcon />
 						</Fab>
+					</div>
+					<div className='weatherComponent'>
+						<WeatherComponent value={this.state.searchedCity}/>
 					</div>
 				</div>
 			);

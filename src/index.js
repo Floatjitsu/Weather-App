@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import WeatherComponent from './WeatherComponent';
 import SearchBar from './SearchBar';
 
 class App extends React.Component {
@@ -9,7 +8,6 @@ class App extends React.Component {
 		return (
 			<div className='app'>
 				<SearchBar />
-				<WeatherComponent value={'35'} />
 			</div>
 		);
 	}

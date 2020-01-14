@@ -1,6 +1,6 @@
 import React from 'react';
-import searchLogo from './search.svg';
 import AutocompleteCity from './AutocompleteCity';
+import WeatherComponent from './WeatherComponent';
 
 class SearchBar extends React.Component {
 	render() {
