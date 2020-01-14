@@ -25,114 +25,130 @@ const getCurrentCityOfUser = new Promise((resolve, reject) => {
 });
 
 class AutocompleteCity extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedCity: '',
-			cityAutocompleteOptions: ['Type in city...']
-		}
-	}
-
-	clearAutocompleteOptions() {
-		this.setState({
-			cityAutocompleteOptions: []
-		});
-	}
-
-	getCitiesStartsWithValue(value) {
-		return cityNameDimension.filter((city) => {
-			return city.startsWith(value);
-		}).top(20);
-	}
-
-	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'
-	// Example: London, England, United Kingdom
-	getAutocompleteCitiesInOutputFormat(cities) {
-		return cities.map(cityObject => {
-			return cityObject.name + ', ' + cityObject.subcountry + ', ' + cityObject.country;
-		});
-	}
-
-	onInputChange(event, value, reason) {
-		this.clearAutocompleteOptions();
-		const cityFilter = this.getCitiesStartsWithValue(value);
-		this.setState({
-			selectedCity: value,
-			cityAutocompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
-		});
-	}
-
-	onSearchButtonClick(event) {
-		const cityName = this.state.selectedCity.split(',')[0];
-		this.setState({
-			searchedCity: cityName
-		});
-	}
-
-	componentDidMount() {
-		getCurrentCityOfUser.then(result => {
-			this._asyncRequest = null;
-			this.setState({selectedCity: result});
-		});
-	}
-
-	componentWillUnmount() {
-	    if (this._asyncRequest) {
-	      this._asyncRequest.cancel();
-	    }
-  	}
-
 	render() {
-		if (this.state.selectedCity === null) {
-			return (
-				<div className='autoCompleteContainer'>
-					<div className='autoComplete'>
-						<Autocomplete
-							id='autocomplete-city'
-							onInputChange={this.onInputChange.bind(this)}
-							options={this.state.cityAutocompleteOptions}
-							renderInput={params => (
-								<TextField {...params} label='City' variant='outlined' fullWidth/>
-							)}
-						/>
-					</div>
-					<div className='searchLogo'>
-						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
-							<SearchIcon />
-						</Fab>
-					</div>
-					<div className='weatherComponent'>
-						<WeatherComponent value={this.state.searchedCity}/>
-					</div>
-				</div>
-			);
-		} else {
-			return (
-				<div className='autoCompleteContainer'>
-					<div className='autoComplete'>
-						<Autocomplete
-							id='autocomplete-city'
-							onInputChange={this.onInputChange.bind(this)}
-							options={this.state.cityAutocompleteOptions}
-							value={this.state.selectedCity}
-							renderInput={params => (
-								<TextField {...params} label='City' variant='outlined' fullWidth/>
-							)}
-						>
-						</Autocomplete>
-					</div>
-					<div className='searchLogo'>
-						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
-							<SearchIcon />
-						</Fab>
-					</div>
-					<div className='weatherComponent'>
-						<WeatherComponent value={this.state.searchedCity}/>
-					</div>
-				</div>
-			);
-		}
-	}
+		return(
+			<Autocomplete
+				id='autocomplete-city'
+				onInputChange={this.props.inputChange.bind(this)}
+				options={this.props.autoCompleteOptions}
+				value={this.props.inputValue}
+				renderInput={params => (
+					<TextField {...params} label='City' variant='outlined' fullWidth/>
+				)}
+			/>
+		);
+	}	
 }
+
+// class AutocompleteCity extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {
+// 			selectedCity: '',
+// 			cityAutocompleteOptions: ['Type in city...']
+// 		}
+// 	}
+//
+// 	clearAutocompleteOptions() {
+// 		this.setState({
+// 			cityAutocompleteOptions: []
+// 		});
+// 	}
+//
+// 	getCitiesStartsWithValue(value) {
+// 		return cityNameDimension.filter((city) => {
+// 			return city.startsWith(value);
+// 		}).top(20);
+// 	}
+//
+// 	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'
+// 	// Example: London, England, United Kingdom
+// 	getAutocompleteCitiesInOutputFormat(cities) {
+// 		return cities.map(cityObject => {
+// 			return cityObject.name + ', ' + cityObject.subcountry + ', ' + cityObject.country;
+// 		});
+// 	}
+//
+// 	onInputChange(event, value, reason) {
+// 		this.clearAutocompleteOptions();
+// 		const cityFilter = this.getCitiesStartsWithValue(value);
+// 		this.setState({
+// 			selectedCity: value,
+// 			cityAutocompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
+// 		});
+// 	}
+//
+// 	onSearchButtonClick(event) {
+// 		const cityName = this.state.selectedCity.split(',')[0];
+// 		this.setState({
+// 			searchedCity: cityName
+// 		});
+// 	}
+//
+// 	componentDidMount() {
+// 		getCurrentCityOfUser.then(result => {
+// 			this._asyncRequest = null;
+// 			this.setState({selectedCity: result});
+// 		});
+// 	}
+//
+// 	componentWillUnmount() {
+// 	    if (this._asyncRequest) {
+// 	      this._asyncRequest.cancel();
+// 	    }
+//   	}
+//
+// 	render() {
+// 		if (this.state.selectedCity === null) {
+// 			return (
+// 				<div className='autoCompleteContainer'>
+// 					<div className='autoComplete'>
+// 						<Autocomplete
+// 							id='autocomplete-city'
+// 							onInputChange={this.onInputChange.bind(this)}
+// 							options={this.state.cityAutocompleteOptions}
+// 							renderInput={params => (
+// 								<TextField {...params} label='City' variant='outlined' fullWidth/>
+// 							)}
+// 						/>
+// 					</div>
+// 					<div className='searchLogo'>
+// 						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+// 							<SearchIcon />
+// 						</Fab>
+// 					</div>
+// 					<div className='weatherComponent'>
+// 						<WeatherComponent value={this.state.searchedCity}/>
+// 					</div>
+// 				</div>
+// 			);
+// 		} else {
+// 			return (
+// 				<div className='autoCompleteContainer'>
+// 					<div className='autoComplete'>
+// 						<Autocomplete
+// 							id='autocomplete-city'
+// 							onInputChange={this.props.inputChange.bind(this)}
+// 							options={this.state.cityAutocompleteOptions}
+// 							value={this.props.inputValue}
+// 							renderInput={params => (
+// 								<TextField {...params} label='City' variant='outlined' fullWidth/>
+// 							)}
+// 						>
+// 						</Autocomplete>
+// 					</div>
+// 					<div className='searchLogo'>
+// 						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+// 							<SearchIcon />
+// 						</Fab>
+// 					</div>
+// 					<div className='weatherComponent'>
+// 						<WeatherComponent value={this.state.searchedCity}/>
+// 					</div>
+// 				</div>
+// 			);
+// 		}
+// 	}
+// }
 
 export default AutocompleteCity;

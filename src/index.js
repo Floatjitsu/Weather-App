@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import WeatherComponent from './WeatherComponent';
 import SearchBar from './SearchBar';
 
 class App extends React.Component {
+	state = {
+		city: 'Augsburg'
+	}
+
+	renderWeatherComponent() {
+		return (<WeatherComponent value='test'/>);
+	}
+
+	onSearchButtonClick(val) {
+		return (<WeatherComponent value={val} />);
+	}
+
 	render() {
 		return (
 			<div className='app'>
-				<SearchBar />
+				<SearchBar
+					value={this.state.city}
+					onSearch={this.onSearchButtonClick}/>
+				{this.renderWeatherComponent()}
 			</div>
 		);
 	}

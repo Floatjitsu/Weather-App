@@ -17,7 +17,14 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     align-content: space-between;
+}
 
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: space-between;
 }
 
 .autoComplete {
