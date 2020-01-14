@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
 	}
 
 	onInputChange = (event, value, reason) => {
-		this.clearAutocompleteOptions();
+		this.clearAutocompleteOptions(['Type in city...']);
 		const cityFilter = this.getCitiesStartsWithValue(value);
 		this.setState({
 			selectedCity: value,
@@ -27,12 +27,11 @@ class SearchBar extends React.Component {
 	}
 
 	state = {
-		city: 'Augsburg, Bavaria, Germany',
 		autoCompleteOptions: ['Type in city...']
 	}
 
-	clearAutocompleteOptions = () => {
-		this.setState({autoCompleteOptions: []});
+	setAutocompleteOptions = (newAutoCompleteOptions) => {
+		this.setState({autoCompleteOptions: newAutoCompleteOptions});
 	}
 
 	getCitiesStartsWithValue(value) {
@@ -49,6 +48,11 @@ class SearchBar extends React.Component {
 		});
 	}
 
+	onSearchTest() {
+		console.log('ON SEARCH TEST');
+		this.props.onSearch('HELLO');
+	}
+
 	render() {
 		return (
 			<div className='searchContainer'>
@@ -59,7 +63,7 @@ class SearchBar extends React.Component {
 					autoCompleteOptions={this.state.autoCompleteOptions} />
 				</div>
 				<div className='searchLogo'>
-					<Fab color="primary" aria-label="add" onClick={this.props.onSearch.bind(this)}>
+					<Fab color="primary" aria-label="add" onClick={this.onSearchTest.bind(this)}>
 						<SearchIcon />
 					</Fab>
 				</div>

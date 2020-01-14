@@ -9,12 +9,12 @@ class App extends React.Component {
 		city: 'Augsburg'
 	}
 
-	renderWeatherComponent() {
-		return (<WeatherComponent value='test'/>);
+	renderWeatherComponent(val) {
+		return (<WeatherComponent value={val}/>);
 	}
 
 	onSearchButtonClick(val) {
-		return (<WeatherComponent value={val} />);
+		return (<WeatherComponent value={val}/>);
 	}
 
 	render() {

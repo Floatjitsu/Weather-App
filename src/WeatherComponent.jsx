@@ -16,7 +16,7 @@ class WeatherComponent extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className='weatherComponent'>
 				<p>{this.props.value}</p>
 			</div>
 		);
