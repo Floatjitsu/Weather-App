@@ -5,8 +5,8 @@ import crossfilter from 'crossfilter2';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import WeatherComponent from './WeatherComponent';
-const cities = require('./cities.json');
-const request = require('request');
+import cities from './cities.json';
+import request from 'request';
 
 const citiesFilter = crossfilter(cities);
 const cityNameDimension = citiesFilter.dimension((city) => {
