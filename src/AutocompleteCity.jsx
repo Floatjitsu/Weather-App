@@ -1,56 +1,16 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import request from 'request';
-
-const getCurrentCityOfUser = new Promise((resolve, reject) => {
-	request('https://freegeoip.app/json/', (error, response, body) => {
-		if (!error) {
-			const result = JSON.parse(body);
-			if (result.city) {
-				resolve(result.city + ', ' + result.region_name + ', ' + result.country_name);
-			} else {
-				reject('Could not detect city!');
-			}
-		} else {
-			reject(error);
-		}
-	});
-});
 
 class AutocompleteCity extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			cityOfUser: ''
-		}
-	}
-
-	componentDidMount() {
-		getCurrentCityOfUser.then(result => {
-			this._asyncRequest = null;
-			this.setState({
-				cityOfUser: result
-			});
-		}).catch(err => {
-			console.log(err);
-		});
-	}
-
-	componentWillUnmount() {
-	    if (this._asyncRequest) {
-	      this._asyncRequest.cancel();
-	    }
-  	}
-
 	render() {
-		if (this.state.cityOfUser === null) {
+		if (this.props.value == null) {
 			return (
 				<Autocomplete
 					id='autocomplete-city'
 					onInputChange={this.props.inputChange.bind(this)}
 					options={this.props.autoCompleteOptions}
-					value={this.state.cityOfUser}
+					value={null}
 					renderInput={params => (
 						<TextField {...params} label='City' variant='outlined' fullWidth/>
 					)}
@@ -62,6 +22,7 @@ class AutocompleteCity extends React.Component {
 					id='autocomplete-city'
 					onInputChange={this.props.inputChange.bind(this)}
 					options={this.props.autoCompleteOptions}
+					value={this.props.value}
 					renderInput={params => (
 						<TextField {...params} label='City' variant='outlined' fullWidth/>
 					)}

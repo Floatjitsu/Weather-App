@@ -6,6 +6,22 @@ import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import cities from './cities.json';
+import request from 'request';
+
+const getCurrentCityOfUser = new Promise((resolve, reject) => {
+	request('https://freegeoip.app/json/', (error, response, body) => {
+		if (!error) {
+			const result = JSON.parse(body);
+			if (result.city) {
+				resolve(result.city + ', ' + result.region_name + ', ' + result.country_name);
+			} else {
+				reject('Could not detect city!');
+			}
+		} else {
+			reject(error);
+		}
+	});
+});
 
 const citiesFilter = crossfilter(cities);
 const cityNameDimension = citiesFilter.dimension((city) => {
@@ -17,8 +33,25 @@ class SearchBar extends React.Component {
 		super(props);
 	}
 
+	componentDidMount() {
+		getCurrentCityOfUser.then(result => {
+			this._asyncRequest = null;
+			this.setState({
+				selectedCity: result
+			});
+		}).catch(err => {
+			console.log(err);
+		});
+	}
+
+	componentWillUnmount() {
+	    if (this._asyncRequest) {
+	      this._asyncRequest.cancel();
+	    }
+  	}
+
 	onInputChange = (event, value, reason) => {
-		this.clearAutocompleteOptions(['Type in city...']);
+		this.setAutocompleteOptions(['Type in city...']);
 		const cityFilter = this.getCitiesStartsWithValue(value);
 		this.setState({
 			selectedCity: value,
@@ -48,27 +81,45 @@ class SearchBar extends React.Component {
 		});
 	}
 
-	onSearchTest() {
-		console.log('ON SEARCH TEST');
-		this.props.onSearch('HELLO');
+	onSearchButtonClick() {
+		this.props.onSearch(this.state.selectedCity);
 	}
 
 	render() {
-		return (
-			<div className='searchContainer'>
-				<div className='autoComplete'>
-				<AutocompleteCity
-					inputValue={this.state.city}
-					inputChange={this.onInputChange}
-					autoCompleteOptions={this.state.autoCompleteOptions} />
+		if (this.state.selectedCity === null) {
+			return (
+				<div className='searchContainer'>
+					<div className='autoComplete'>
+					<AutocompleteCity
+						inputChange={this.onInputChange}
+						autoCompleteOptions={this.state.autoCompleteOptions} />
+					</div>
+					<div className='searchLogo'>
+						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+							<SearchIcon />
+						</Fab>
+					</div>
 				</div>
-				<div className='searchLogo'>
-					<Fab color="primary" aria-label="add" onClick={this.onSearchTest.bind(this)}>
-						<SearchIcon />
-					</Fab>
+			);
+
+		} else {
+			return (
+				<div className='searchContainer'>
+					<div className='autoComplete'>
+					<AutocompleteCity
+						value={this.state.selectedCity}
+						inputChange={this.onInputChange}
+						autoCompleteOptions={this.state.autoCompleteOptions} />
+					</div>
+					<div className='searchLogo'>
+						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+							<SearchIcon />
+						</Fab>
+					</div>
 				</div>
-			</div>
-		);
+			);
+		}
+
 	}
 }
 
