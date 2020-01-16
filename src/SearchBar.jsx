@@ -67,7 +67,7 @@ class SearchBar extends React.Component {
 
 	getCitiesStartsWithValue = (value) => {
 		return cityNameDimension.filter((city) => {
-			return city.startsWith(value);
+			return city.startsWith(value) || city.startsWith('&#304');
 		}).top(20);
 	}
 

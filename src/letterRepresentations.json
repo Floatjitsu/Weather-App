@@ -1,0 +1,29 @@
+{
+	"alphabet": [
+		{
+			"letter": "I",
+			"representations": [
+				"\u0130",
+				"\u0049"
+			]
+		},
+		{
+			"letter": "i",
+			"representations": [
+				"\u0131"				
+			]
+		},
+		{
+			"letter": "S",
+			"representations": [
+				"\u015E"
+			]
+		},
+		{
+			"letter": "s",
+			"representations": [
+				"\u015F"
+			]
+		}
+	]
+}
