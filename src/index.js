@@ -5,7 +5,6 @@ import WeatherComponent from './WeatherComponent';
 import SearchBar from './SearchBar';
 
 class App extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,13 +17,22 @@ class App extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='app'>
-				<SearchBar
-					onSearch={this.onSearchButtonClick.bind(this)}/>
-				<WeatherComponent value={this.state.city}/>
-			</div>
-		);
+		if (this.state.city === '') {
+			return (
+				<div className='app'>
+					<SearchBar
+						onSearch={this.onSearchButtonClick.bind(this)}/>
+				</div>
+			);
+		} else {
+			return (
+				<div className='app'>
+					<SearchBar
+						onSearch={this.onSearchButtonClick.bind(this)}/>
+					<WeatherComponent value={this.state.city}/>
+				</div>
+			);
+		}
 	}
 }
 

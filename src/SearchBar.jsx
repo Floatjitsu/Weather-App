@@ -1,8 +1,6 @@
 import React from 'react';
 import AutocompleteCity from './AutocompleteCity';
-import WeatherComponent from './WeatherComponent';
 import crossfilter from 'crossfilter2';
-import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import cities from './cities.json';
@@ -29,10 +27,6 @@ const cityNameDimension = citiesFilter.dimension((city) => {
 });
 
 class SearchBar extends React.Component {
-	constructor(props){
-		super(props);
-	}
-
 	componentDidMount() {
 		getCurrentCityOfUser.then(result => {
 			this._asyncRequest = null;
@@ -52,11 +46,15 @@ class SearchBar extends React.Component {
 
 	onInputChange = (event, value, reason) => {
 		this.setAutocompleteOptions(['Type in city...']);
-		const cityFilter = this.getCitiesStartsWithValue(value);
+		const cityFilter = this.getCitiesStartsWithValue(this.capitalizeString(value));
 		this.setState({
 			selectedCity: value,
 			autoCompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
 		});
+	}
+
+	capitalizeString = (stringToCapitalize) => {
+		return stringToCapitalize.charAt(0).toUpperCase() + stringToCapitalize.slice(1);
 	}
 
 	state = {
@@ -67,7 +65,7 @@ class SearchBar extends React.Component {
 		this.setState({autoCompleteOptions: newAutoCompleteOptions});
 	}
 
-	getCitiesStartsWithValue(value) {
+	getCitiesStartsWithValue = (value) => {
 		return cityNameDimension.filter((city) => {
 			return city.startsWith(value);
 		}).top(20);
