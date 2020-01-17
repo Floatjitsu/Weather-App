@@ -40,11 +40,12 @@ class SearchBar extends React.Component {
 
 	onInputChange = (event, value, reason) => {
 		this.setAutocompleteOptions(['Type in city...']);
-		const cityFilter = getCitiesStartsWithValue(this.capitalizeString(value));
-		this.setState({
-			selectedCity: value,
-			autoCompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
-		});
+		this.setSelectedCity('');
+		if (value.length > 0) {
+			const cityFilter = getCitiesStartsWithValue(this.capitalizeString(value));
+			this.setSelectedCity(value);
+			this.setAutocompleteOptions(this.getAutocompleteCitiesInOutputFormat(cityFilter));
+		}
 	}
 
 	capitalizeString = (stringToCapitalize) => {
@@ -57,6 +58,12 @@ class SearchBar extends React.Component {
 
 	setAutocompleteOptions = (newAutoCompleteOptions) => {
 		this.setState({autoCompleteOptions: newAutoCompleteOptions});
+	}
+
+	setSelectedCity = value => {
+		this.setState({
+			selectedCity: value
+		});
 	}
 
 	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'

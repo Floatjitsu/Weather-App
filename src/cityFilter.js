@@ -2,6 +2,8 @@ import cities from './cities.json';
 import crossfilter from 'crossfilter2';
 import alphabetRepresentations from './letterRepresentations.json';
 
+const maxFilterResults = 25;
+
 const alphabetArray = alphabetRepresentations.alphabet;
 
 const citiesFilter = crossfilter(cities);
@@ -40,13 +42,13 @@ const getCitiesStartsWithValueWithRepresentation = value => {
 	}
 	return cityNameDimension.filter(city => {
 		return city.startsWith(value) || city.startsWith(...searchValuesWithRepresentations);
-	}).top(20);
+	}).top(maxFilterResults);
 }
 
 const getCitiesStartsWithValueWithoutRepresentation = value => {
 	return cityNameDimension.filter(city => {
 		return city.startsWith(value);
-	}).top(20);
+	}).top(maxFilterResults);
 };
 
 
