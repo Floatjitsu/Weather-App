@@ -1,7 +1,30 @@
 import React from 'react';
 import Fade from '@material-ui/core/Fade';
+import weatherData from './weatherData';
 
 class WeatherComponent extends React.Component {
+	state = {
+		temperatureNow: '35 °C'
+	}
+
+	componentDidUpdate = () => {
+		this.setTemperatureForCurrentCity();
+	}
+
+	componentDidMount = () => {
+		this.setTemperatureForCurrentCity();
+	}
+
+	setTemperatureForCurrentCity = () => {
+		weatherData(this.props.value).then(result => {
+			this.setState({
+				temperatureNow: result.toFixed(1) + ' °C'
+			});
+		}).catch(error => {
+			console.log(error);
+		})
+	}
+
 	render() {
 		return (
 			<div className='weatherComponentContainer'>
@@ -11,7 +34,7 @@ class WeatherComponent extends React.Component {
 					</Fade>
 				</div>
 				<div className='weatherComponentDegree'>
-					<p>35 °C</p>
+					<p>{this.state.temperatureNow}</p>
 				</div>
 			</div>
 		);
