@@ -1,10 +1,9 @@
 import React from 'react';
 import AutocompleteCity from './AutocompleteCity';
-import crossfilter from 'crossfilter2';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
-import cities from './cities.json';
 import request from 'request';
+import {getCitiesStartsWithValue} from './cityFilter.js';
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {
@@ -19,11 +18,6 @@ const getCurrentCityOfUser = new Promise((resolve, reject) => {
 			reject(error);
 		}
 	});
-});
-
-const citiesFilter = crossfilter(cities);
-const cityNameDimension = citiesFilter.dimension((city) => {
-	return decodeURI(city.name) || '';
 });
 
 class SearchBar extends React.Component {
@@ -46,7 +40,7 @@ class SearchBar extends React.Component {
 
 	onInputChange = (event, value, reason) => {
 		this.setAutocompleteOptions(['Type in city...']);
-		const cityFilter = this.getCitiesStartsWithValue(this.capitalizeString(value));
+		const cityFilter = getCitiesStartsWithValue(this.capitalizeString(value));
 		this.setState({
 			selectedCity: value,
 			autoCompleteOptions: this.getAutocompleteCitiesInOutputFormat(cityFilter)
@@ -63,12 +57,6 @@ class SearchBar extends React.Component {
 
 	setAutocompleteOptions = (newAutoCompleteOptions) => {
 		this.setState({autoCompleteOptions: newAutoCompleteOptions});
-	}
-
-	getCitiesStartsWithValue = (value) => {
-		return cityNameDimension.filter((city) => {
-			return city.startsWith(value) || city.startsWith('&#304');
-		}).top(20);
 	}
 
 	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import WeatherComponent from './WeatherComponent';
 import SearchBar from './SearchBar';
-import {getRepresentations} from './cityFilter.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -11,7 +10,6 @@ class App extends React.Component {
 		this.state = {
 			city: ''
 		}
-		console.log(getRepresentations('I'));
 	}
 
 	onSearchButtonClick(value) {

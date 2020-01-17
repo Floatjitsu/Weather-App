@@ -1,16 +1,113 @@
 {
-	"alphabet": [
+	"alphabet": [		
+		{
+			"letter": "A",
+			"representations": [
+				"\u00C0",
+				"\u00C1",
+				"\u00C2",
+				"\u00C3",
+				"\u00C4",
+				"\u00C5",
+				"\u00C6"
+			]
+		},
+		{
+			"letter": "a",
+			"representations": [
+				"\u00E0",
+				"\u00E1",
+				"\u00E2",
+				"\u00E3",
+				"\u00E4",
+				"\u00E5",
+				"\u00E6"
+			]
+		},
+		{
+			"letter": "C",
+			"representations": [
+				"\u00C7"
+			]
+		},
+		{
+			"letter": "c",
+			"representations": [
+				"\u00E7"
+			]
+		},
+		{
+			"letter": "D",
+			"representations": [
+				"\u00D0"
+			]
+		},
+		{
+			"letter": "E",
+			"representations": [
+				"\u00C8",
+				"\u00C9",
+				"\u00CA",
+				"\u00CB"
+			]
+		},
+		{
+			"letter": "e",
+			"representations": [
+				"\u00E8",
+				"\u00E9",
+				"\u00EA",
+				"\u00EB"
+			]
+		},
+		{
+			"letter": "G",
+			"representations": [
+				"\u011E"
+			]
+		},
+		{
+			"letter": "g",
+			"representations": [
+				"\u011F"
+			]
+		},
 		{
 			"letter": "I",
 			"representations": [
 				"\u0130",
-				"\u0049"
+				"\u0049",
+				"\u00CC",
+				"\u00CD",
+				"\u00CE",
+				"\u00CF"
 			]
 		},
 		{
 			"letter": "i",
 			"representations": [
-				"\u0131"				
+				"\u0131",
+				"\u00EC",
+				"\u00ED",
+				"\u00EE",
+				"\u00EF"				
+			]
+		},
+		{
+			"letter": "N",
+			"representations": [
+				"\u00D1"
+			]
+		},
+		{
+			"letter": "O",
+			"representations": [
+				"\u00D2",
+				"\u00D3",
+				"\u00D4",
+				"\u00D5",
+				"\u00D6",
+				"\u00D8"
 			]
 		},
 		{
@@ -23,6 +120,21 @@
 			"letter": "s",
 			"representations": [
 				"\u015F"
+			]
+		},
+		{
+			"letter": "U",
+			"representations": [
+				"\u00D9",
+				"\u00DA",
+				"\u00DB",
+				"\u00DC"
+			]
+		},
+		{
+			"letter": "Y",
+			"representations": [
+				"\u00DD"
 			]
 		}
 	]
