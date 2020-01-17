@@ -75,7 +75,7 @@ class SearchBar extends React.Component {
 	}
 
 	onSearchButtonClick() {
-		this.props.onSearch(this.state.selectedCity);
+		this.props.onSearch(this.state.selectedCity.split(',')[0]);
 	}
 
 	render() {
