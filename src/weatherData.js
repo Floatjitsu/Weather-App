@@ -7,7 +7,11 @@ const getCurrentWeatherForCity = city => {
 	return new Promise((resolve, reject) => {
 		request(apiUrl + '&q=' + city + '&' + apiKey, (error, response, body) => {
 			if (response.statusCode === 200) {
-				resolve(JSON.parse(body).main.temp);
+				const jsonBody = JSON.parse(body);
+				resolve({
+					temperatureNow: jsonBody.main.temp,
+					weather: jsonBody.weather[0].main
+				});
 			} else {
 				reject(response.statusMessage);
 			}
