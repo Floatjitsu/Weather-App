@@ -10,7 +10,8 @@ const getCurrentWeatherForCity = city => {
 				const jsonBody = JSON.parse(body);
 				resolve({
 					temperatureNow: jsonBody.main.temp,
-					weather: jsonBody.weather[0].main
+					weather: jsonBody.weather[0].main,
+					weatherDescription: jsonBody.weather[0].description
 				});
 			} else {
 				reject(response.statusMessage);

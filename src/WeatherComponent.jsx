@@ -36,6 +36,7 @@ class WeatherComponent extends React.Component {
 			weatherData(this.props.value).then(result => {
 				this.setTemperatureNowState(result.temperatureNow.toFixed(1) + ' C°');
 				this.setWeatherState(result.weather);
+				this.setWeatherDescriptionState(result.weatherDescription);
 			}).catch(error => {
 				reject(error);
 			});
@@ -60,6 +61,20 @@ class WeatherComponent extends React.Component {
 		});
 	}
 
+	setWeatherDescriptionState = weatherDescription => {
+		this.setState({
+			weatherDescription: this.capitalizeWeatherDescription(weatherDescription)
+		});
+	}
+
+	/* API delivers weather description in no capitalized form */
+	capitalizeWeatherDescription = weatherDescription => {
+		return weatherDescription.toLowerCase()
+			.split(' ')
+			.map(s => s.charAt(0).toUpperCase() + s.substr(1))
+			.join(' ');
+	}
+
 	render() {
 		return (
 			<div className='weatherComponentContainer'>
@@ -79,8 +94,11 @@ class WeatherComponent extends React.Component {
 				<div className='weatherComponentDegree'>
 					<p>{this.state.temperatureNow}</p>
 				</div>
-				<div className='weatherComponentWeatherImage'>
+				<div>
 					<WeatherImage value={this.state.weather}/>
+				</div>
+				<div className='weatherComponentWeatherDescription'>
+					{this.state.weatherDescription}
 				</div>
 			</div>
 		);
