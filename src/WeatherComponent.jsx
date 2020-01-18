@@ -7,20 +7,18 @@ class WeatherComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedCity: this.props.value,
-			error: 'TestError',
-			temperatureNow: '35 °C'
+			error: null
 		}
 	}
 
-	componentDidUpdate = (prevProps) => {
+	componentDidUpdate = prevProps => {
 		if (this.props.value !== prevProps.value) {
-			this.setTemperatureForCurrentCity().then()
+			this.setTemperatureForCurrentCity()
+				.then(result => {
+					this.setErrorState(null);
+				})
 				.catch(error => {
-					console.log(error);
-					this.setState({
-						error: error
-					});
+					this.setErrorState(error);
 				});
 		}
 	}
@@ -28,10 +26,8 @@ class WeatherComponent extends React.Component {
 	componentDidMount = () => {
 		this.setTemperatureForCurrentCity().then()
 			.catch(error => {
-				this.setState({
-					error: error
-				});
-			});
+				this.setErrorState(error);
+		});
 	}
 
 	setTemperatureForCurrentCity = () => {
@@ -45,6 +41,12 @@ class WeatherComponent extends React.Component {
 				reject(error);
 			});
 		});
+	}
+
+	setErrorState = error => {
+		this.setState({
+			error: error
+		})
 	}
 
 	render() {
