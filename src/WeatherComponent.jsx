@@ -3,7 +3,7 @@ import Fade from '@material-ui/core/Fade';
 import weatherData from './weatherData';
 import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded';
 import WeatherImage from './WeatherImage';
-import {List, ListItem, Divider, ListItemText} from '@material-ui/core';
+import WeatherForecast from './WeatherForecast';
 
 class WeatherComponent extends React.Component {
 	constructor(props) {
@@ -108,15 +108,9 @@ class WeatherComponent extends React.Component {
 					</Fade>
 				</div>
 				<div className='weatherComponentForecast'>
-					<List>
-						<ListItem alignItems='flex-start'>
-							<ListItemText primary={'test'} />
-						</ListItem>
-						<Divider />
-						<ListItem>
-							<ListItemText primary={'test'} />
-						</ListItem>
-					</List>
+					<Fade in={true} timeout={1900}>
+						<p> <WeatherForecast /> </p>
+					</Fade>
 				</div>
 			</div>
 		);
