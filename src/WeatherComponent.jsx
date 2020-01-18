@@ -2,6 +2,7 @@ import React from 'react';
 import Fade from '@material-ui/core/Fade';
 import weatherData from './weatherData';
 import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded';
+import WeatherImage from './WeatherImage'
 
 class WeatherComponent extends React.Component {
 	constructor(props) {
@@ -33,10 +34,7 @@ class WeatherComponent extends React.Component {
 	setTemperatureForCurrentCity = () => {
 		return new Promise((resolve, reject) => {
 			weatherData(this.props.value).then(result => {
-				this.setState({
-					temperatureNow: result.toFixed(1) + ' °C'
-				});
-				resolve();
+				this.setTemperatureNowState(result.toFixed(1) + ' C°');
 			}).catch(error => {
 				reject(error);
 			});
@@ -46,7 +44,19 @@ class WeatherComponent extends React.Component {
 	setErrorState = error => {
 		this.setState({
 			error: error
-		})
+		});
+	}
+
+	setWeatherState = weather => {
+		this.setState({
+			weather: weather
+		});
+	}
+
+	setTemperatureNowState = temperature => {
+		this.setState({
+			temperatureNow: temperature
+		});
 	}
 
 	render() {
@@ -67,6 +77,9 @@ class WeatherComponent extends React.Component {
 				</div>
 				<div className='weatherComponentDegree'>
 					<p>{this.state.temperatureNow}</p>
+				</div>
+				<div className='weatherComponentWeatherImage'>
+					<WeatherImage value={this.state.weather}/>
 				</div>
 			</div>
 		);

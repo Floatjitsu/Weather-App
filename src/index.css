@@ -58,3 +58,7 @@ body {
     align-items: center;
     text-align: left;
 }
+
+.weatherComponentWeatherImage {
+    width: 5%;
+}
