@@ -9,7 +9,12 @@ const dateHandler = new DateHandler();
 class WeatherComponent extends React.Component {
 
 	componentWillMount = () => {
-		console.log('will mount');
+		const tomorrow =
+			dateHandler.reformatDateString(dateHandler.getTommorowsDate(), 'DD/MM/YYYY', 'YYYY-MM-DD');
+		weatherData.loadWeatherForecastForCity(this.props.value).then(result => {
+			const test = weatherData.getWeatherForecast(this.props.value, tomorrow);
+			console.log(test);
+		});
 	}
 
 	state = {
@@ -19,9 +24,6 @@ class WeatherComponent extends React.Component {
 	handleTabChange = (event, newValue) => {
 		console.log(dateHandler.reformatDateString(event.currentTarget.textContent, 'DD/MM/YYYY', 'YYYY-MM-DD'));
 		this.setSelectedTabNumber(newValue);
-		// weatherData.loadWeatherForecastForCity(this.props.value).then(result => {
-		// 	console.log(result);
-		// });
 	}
 
 	setSelectedTabNumber = value => {

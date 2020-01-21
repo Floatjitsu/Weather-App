@@ -53,8 +53,22 @@ const loadWeatherForecastForCity = city => {
 
 const getWeatherForecast = (city, date) => {
 	if (weatherForecastForCity.city === city) {
-
+		let result = [];
+		for (const forecast of weatherForecastForCity.forecast) {
+			if (forecast.dt_txt.includes(date)) {
+				result.push(extractDataFromForecastObject(forecast));
+			}
+		}
+		return result;
 	}
+	return [];
 }
 
-export default {getCurrentWeatherForCity, loadWeatherForecastForCity};
+const extractDataFromForecastObject = forecastObject => {
+	return {
+		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
+		weather: forecastObject.weather[0]
+	};
+}
+
+export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecast};
