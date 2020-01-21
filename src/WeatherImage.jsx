@@ -5,6 +5,7 @@ import SnowImage from './weatherImages/snow.svg';
 import CloudyImage from './weatherImages/cloudy.svg';
 import FoggyImage from './weatherImages/foggy.svg';
 import MistImage from './weatherImages/mist.svg';
+import DrizzleImage from './weatherImages/drizzle.svg';
 
 const imageStyle = {height: 100, width: 100};
 
@@ -44,6 +45,12 @@ export default class WeatherImage extends React.Component {
 			case 'Mist':
 				return (
 					<img src={MistImage}
+						 style={imageStyle}
+						 alt={this.props.value} />
+				);
+			case 'Drizzle':
+				return (
+					<img src={DrizzleImage}
 						 style={imageStyle}
 						 alt={this.props.value} />
 				);
