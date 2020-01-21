@@ -22,16 +22,18 @@ class WeatherComponent extends React.Component {
 
 	render() {
 		return (
-			<AppBar position='static' color='default'>
-				<Tabs
-					value={this.state.selectedTabNumber}
-					onChange={this.handleTabChange.bind(this)}>
-					<Tab label={dateHandler.getTommorowsDate()} />
-					<Tab label={dateHandler.getTwoDaysAfterTodaysDate()} />
-					<Tab label={dateHandler.getThreeDaysAfterTodaysDate()} />
-					<Tab label={dateHandler.getFourDaysAfterTodaysDate()} />
-				</Tabs>
-			</AppBar>
+			<div>
+				<AppBar position='static' color='default'>
+					<Tabs
+						value={this.state.selectedTabNumber}
+						onChange={this.handleTabChange.bind(this)}>
+						<Tab label={dateHandler.getTommorowsDate()} />
+						<Tab label={dateHandler.getTwoDaysAfterTodaysDate()} />
+						<Tab label={dateHandler.getThreeDaysAfterTodaysDate()} />
+						<Tab label={dateHandler.getFourDaysAfterTodaysDate()} />
+					</Tabs>
+				</AppBar>
+			</div>
 		);
 	}
 
