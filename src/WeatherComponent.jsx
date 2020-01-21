@@ -109,7 +109,7 @@ class WeatherComponent extends React.Component {
 				</div>
 				<div className='weatherComponentForecast'>
 					<Fade in={true} timeout={1900}>
-						<p> <WeatherForecast /> </p>
+						<div> <WeatherForecast value={this.props.value}/> </div>						
 					</Fade>
 				</div>
 			</div>

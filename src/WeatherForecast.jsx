@@ -5,10 +5,27 @@ import DateHandler from './dateHandler.js';
 const dateHandler = new DateHandler();
 
 class WeatherComponent extends React.Component {
+
+	state = {
+		selectedTabNumber: 0
+	}
+
+	handleTabChange = (event, newValue) => {
+		this.setSelectedTabNumber(newValue);
+	}
+
+	setSelectedTabNumber = value => {
+		this.setState({
+			selectedTabNumber: value
+		})
+	}
+
 	render() {
 		return (
-			<AppBar position='static' color='primary'>
-				<Tabs>
+			<AppBar position='static' color='default'>
+				<Tabs
+					value={this.state.selectedTabNumber}
+					onChange={this.handleTabChange.bind(this)}>
 					<Tab label={dateHandler.getTommorowsDate()} />
 					<Tab label={dateHandler.getTwoDaysAfterTodaysDate()} />
 					<Tab label={dateHandler.getThreeDaysAfterTodaysDate()} />
