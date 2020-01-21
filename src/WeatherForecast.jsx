@@ -17,10 +17,9 @@ class WeatherComponent extends React.Component {
 	}
 
 	componentDidUpdate = prevProps => {
-		// console.log(prevProps);
-		// if (prevProps === this.props.value) {
-		// 	this.setSelectedTabNumber(0);
-		// }
+		if (prevProps.value !== this.props.value) {
+			this.setSelectedTabNumber(0);
+		}
 	}
 
 	state = {
@@ -28,7 +27,7 @@ class WeatherComponent extends React.Component {
 	}
 
 	handleTabChange = (event, newValue) => {
-		console.log(dateHandler.reformatDateString(event.currentTarget.textContent, 'DD/MM/YYYY', 'YYYY-MM-DD'));
+		console.log(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
 		this.setSelectedTabNumber(newValue);
 	}
 
