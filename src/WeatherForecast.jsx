@@ -17,6 +17,12 @@ class WeatherComponent extends React.Component {
 		});
 	}
 
+	componentDidUpdate = () => {
+		if (this.state.selectedTabNumber !== 0) {
+			this.setSelectedTabNumber(0);
+		}		
+	}
+
 	state = {
 		selectedTabNumber: 0
 	}
