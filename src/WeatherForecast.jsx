@@ -1,19 +1,19 @@
 import React from 'react';
-import {List, ListItem, Divider, ListItemText} from '@material-ui/core';
+import {List, ListItem, Divider, ListItemText, AppBar, Tab, Tabs} from '@material-ui/core';
 
 class WeatherComponent extends React.Component {
 
 	render() {
 		return (
-			<List>
-				<ListItem alignItems='flex-start'>
-					<ListItemText primary={'test'} />
-				</ListItem>
-				<Divider />
-				<ListItem>
-					<ListItemText primary={'test'} />
-				</ListItem>
-			</List>
+			<AppBar position='static' color='default'>
+				<Tabs>
+					<Tab label='Date One' />
+					<Tab label='Date Two' />
+					<Tab label='Date Three' />
+					<Tab label='Date Four' />
+					<Tab label='Date Five' />
+				</Tabs>
+			</AppBar>
 		);
 	}
 
