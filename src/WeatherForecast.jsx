@@ -9,18 +9,18 @@ const dateHandler = new DateHandler();
 class WeatherComponent extends React.Component {
 
 	componentWillMount = () => {
-		const tomorrow =
-			dateHandler.reformatDateString(dateHandler.getTommorowsDate(), 'DD/MM/YYYY', 'YYYY-MM-DD');
+		const tomorrow = dateHandler.reformatDateFromDisplayToApiFormat(dateHandler.getTommorowsDate());
 		weatherData.loadWeatherForecastForCity(this.props.value).then(result => {
 			const test = weatherData.getWeatherForecast(this.props.value, tomorrow);
 			console.log(test);
 		});
 	}
 
-	componentDidUpdate = () => {
-		if (this.state.selectedTabNumber !== 0) {
-			this.setSelectedTabNumber(0);
-		}		
+	componentDidUpdate = prevProps => {
+		// console.log(prevProps);
+		// if (prevProps === this.props.value) {
+		// 	this.setSelectedTabNumber(0);
+		// }
 	}
 
 	state = {

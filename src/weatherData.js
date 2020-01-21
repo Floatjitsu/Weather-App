@@ -36,7 +36,7 @@ const loadWeatherForecastForCity = city => {
 		q: city,
 		units: metricUnitUrlParam,
 		appid: apiKey
-	}
+	};
 	return new Promise((resolve, reject) => {
 		request({url: apiUrl + forecastWeatherUrlParam, qs: queryParameters}, (error, response, body) => {
 			if (response.statusCode === 200) {
