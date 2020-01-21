@@ -18,6 +18,10 @@ class DateHandler {
 	getFourDaysAfterTodaysDate = () => {
 		return moment(moment().add('4', 'day')).format(dateFormat);
 	}
+
+	reformatDateString = (date, convertFrom, convertTo) => {
+		return moment(date, convertFrom).format(convertTo);
+	}
 }
 
 export default DateHandler;

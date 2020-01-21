@@ -34,7 +34,7 @@ class WeatherComponent extends React.Component {
 
 	setTemperatureForCurrentCity = () => {
 		return new Promise((resolve, reject) => {
-			weatherData(this.props.value).then(result => {
+			weatherData.getCurrentWeatherForCity(this.props.value).then(result => {
 				this.setTemperatureNowState(result.temperatureNow.toFixed(1) + ' C°');
 				this.setWeatherState(result.weather);
 				this.setWeatherDescriptionState(result.weatherDescription);
@@ -109,7 +109,7 @@ class WeatherComponent extends React.Component {
 				</div>
 				<div className='weatherComponentForecast'>
 					<Fade in={true} timeout={1900}>
-						<div> <WeatherForecast value={this.props.value}/> </div>						
+						<div> <WeatherForecast value={this.props.value}/> </div>
 					</Fade>
 				</div>
 			</div>
