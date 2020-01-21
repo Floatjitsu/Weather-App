@@ -1,17 +1,18 @@
 import React from 'react';
 import {List, ListItem, Divider, ListItemText, AppBar, Tab, Tabs} from '@material-ui/core';
+import DateHandler from './dateHandler.js';
+
+const dateHandler = new DateHandler();
 
 class WeatherComponent extends React.Component {
-
 	render() {
 		return (
-			<AppBar position='static' color='default'>
+			<AppBar position='static' color='primary'>
 				<Tabs>
-					<Tab label='Date One' />
-					<Tab label='Date Two' />
-					<Tab label='Date Three' />
-					<Tab label='Date Four' />
-					<Tab label='Date Five' />
+					<Tab label={dateHandler.getTommorowsDate()} />
+					<Tab label={dateHandler.getTwoDaysAfterTodaysDate()} />
+					<Tab label={dateHandler.getThreeDaysAfterTodaysDate()} />
+					<Tab label={dateHandler.getFourDaysAfterTodaysDate()} />
 				</Tabs>
 			</AppBar>
 		);
