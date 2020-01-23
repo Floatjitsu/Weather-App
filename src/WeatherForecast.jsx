@@ -22,7 +22,7 @@ class WeatherComponent extends React.Component {
 		if (prevProps.value !== this.props.value) {
 			this.setSelectedTabNumber(0);
 			weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
-				console.log('Data loaded!');
+				this.setForecastList();
 			}).catch(error => {
 				console.error(error);
 			});
