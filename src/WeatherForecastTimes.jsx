@@ -22,11 +22,11 @@ class WeatherForecastTimes extends React.Component {
 					<ListItemText primary={this.props.forecastList.nineAm} />
 				</ListItem>
 				<ListItem>
-					<ListItemText primary={this.props.threePm} />
+					<ListItemText primary={this.props.forecastList.threePm} />
 				</ListItem>
 				<Divider />
 				<ListItem>
-					<ListItemText primary={this.props.ninePm} />
+					<ListItemText primary={this.props.forecastList.ninePm} />
 				</ListItem>
 			</List>
 		);

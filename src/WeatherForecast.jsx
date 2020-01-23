@@ -72,7 +72,15 @@ class WeatherComponent extends React.Component {
 				this.setState({forecastList: forecastList});
 				break;
 			case '09:00':
-				forecastList.nineAm = weatherDescription
+				forecastList.nineAm = weatherDescription;
+				this.setState({forecastList: forecastList});
+				break;
+			case '15:00':
+				forecastList.threePm = weatherDescription;
+				this.setState({forecastList: forecastList});
+				break;
+			case '21:00':
+				forecastList.ninePm = weatherDescription;
 				this.setState({forecastList: forecastList});
 				break;
 		}
