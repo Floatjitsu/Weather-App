@@ -5,17 +5,14 @@ import weatherData from './weatherData';
 import moment from 'moment';
 import WeatherForecastTimes from './WeatherForecastTimes';
 
+const forecastTimes = ['03:00', '09:00', '15:00', '21:00'];
 const dateHandler = new DateHandler();
 
 class WeatherComponent extends React.Component {
 
 	componentDidMount = () => {
-		const tomorrow =
-			dateHandler.reformatDateFromDisplayToApiFormat(
-				dateHandler.getTommorowsDate()
-			);
 		weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
-			console.log('Data loaded!');
+			this.setForecastList();
 		}).catch(error => {
 			console.error(error);
 		});
@@ -36,7 +33,8 @@ class WeatherComponent extends React.Component {
 		selectedTabNumber: 0,
 		selectedDay: dateHandler.reformatDateFromDisplayToApiFormat(
 						dateHandler.getTommorowsDate()
-					 )
+					),
+		forecastList: {threeAm: 'test'}
 	}
 
 	handleTabChange = (event, newValue) => {
@@ -57,6 +55,29 @@ class WeatherComponent extends React.Component {
 		});
 	}
 
+	setForecastList = () => {
+		for (const time of forecastTimes) {
+			const forecast = weatherData.getWeatherForecastForCityDateTime(
+				this.props.value, this.state.selectedDay, time
+			);
+			this.setForecastListState(time, forecast.weather.description);
+		}
+	}
+
+	setForecastListState = (time, weatherDescription) => {
+		let forecastList = this.state.forecastList;
+		switch (time) {
+			case '03:00':
+				forecastList.threeAm = weatherDescription;
+				this.setState({forecastList: forecastList});
+				break;
+			case '09:00':
+				forecastList.nineAm = weatherDescription
+				this.setState({forecastList: forecastList});
+				break;
+		}
+	}
+
 	render() {
 		return (
 			<div>
@@ -71,7 +92,7 @@ class WeatherComponent extends React.Component {
 					</Tabs>
 				</AppBar>
 				<div className='weatherForecastList'>
-					<WeatherForecastTimes city={this.props.value} day={this.state.selectedDay} />
+					<WeatherForecastTimes forecastList={this.state.forecastList} />
 				</div>
 			</div>
 		);

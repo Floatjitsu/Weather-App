@@ -7,7 +7,7 @@ const forecastWeatherUrlParam = 'forecast';
 const metricUnitUrlParam = 'metric'; // To get temperature in C°
 const apiKey = '63adac7ad2e70d880b81ccda4407faeb';
 
-const weatherForecastForCity = {};
+let weatherForecastForCity = {};
 
 const getCurrentWeatherForCity = city => {
 	const queryParameters = {
@@ -51,12 +51,23 @@ const loadWeatherForecastForCity = city => {
 	});
 }
 
-const getWeatherForecast = (city, date) => {
+const getWeatherForecastForCityDateTime = (city, date, time) => {
+	const weatherForecastCity = _getWeatherForecastForCityDate(city, date);
+	let result = {};
+	for (const forecast of weatherForecastCity) {
+		if (forecast.time == time) {
+			result = forecast;
+		}
+	}
+	return result;
+}
+
+const _getWeatherForecastForCityDate = (city, date) => {
 	if (weatherForecastForCity.city === city) {
 		let result = [];
 		for (const forecast of weatherForecastForCity.forecast) {
 			if (forecast.dt_txt.includes(date)) {
-				result.push(extractDataFromForecastObject(forecast));
+				result.push(_extractDataFromForecastObject(forecast));
 			}
 		}
 		return result;
@@ -64,11 +75,11 @@ const getWeatherForecast = (city, date) => {
 	return [];
 }
 
-const extractDataFromForecastObject = forecastObject => {
+const _extractDataFromForecastObject = forecastObject => {
 	return {
 		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
 		weather: forecastObject.weather[0]
 	};
 }
 
-export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecast};
+export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecastForCityDateTime};
