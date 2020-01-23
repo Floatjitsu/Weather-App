@@ -16,7 +16,7 @@ class WeatherComponent extends React.Component {
 	componentDidUpdate = prevProps => {
 		if (this.props.value !== prevProps.value) {
 			this.setTemperatureForCurrentCity()
-				.then(result => {
+				.then(() => {
 					this.setErrorState(null);
 				})
 				.catch(error => {
@@ -38,6 +38,7 @@ class WeatherComponent extends React.Component {
 				this.setTemperatureNowState(result.temperatureNow.toFixed(1) + ' C°');
 				this.setWeatherState(result.weather);
 				this.setWeatherDescriptionState(result.weatherDescription);
+				resolve();
 			}).catch(error => {
 				reject(error);
 			});
@@ -77,16 +78,20 @@ class WeatherComponent extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='weatherComponentContainer'>
-				{this.state.error &&
+		if (this.state.error !== null) {
+			return (
+				<div className='weatherComponentContainer'>
 					<div className='errorBox'>
 						<SentimentDissatisfiedRoundedIcon />
 						<div style={{marginLeft: 10}}>
 							{this.state.error}
 						</div>
 					</div>
-				}
+				</div>
+			);
+		}
+		return (
+			<div className='weatherComponentContainer'>
 				<div className='weatherComponentCity'>
 					<Fade in={true} timeout={1100}>
 						<p>{this.props.value}</p>
