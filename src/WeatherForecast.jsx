@@ -34,13 +34,13 @@ class WeatherComponent extends React.Component {
 		selectedDay: dateHandler.reformatDateFromDisplayToApiFormat(
 						dateHandler.getTommorowsDate()
 					),
-		forecastList: {threeAm: 'test'}
+		forecastList: {}
 	}
 
 	handleTabChange = (event, newValue) => {
-		// console.log(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
 		this.setSelectedDay(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
 		this.setSelectedTabNumber(newValue);
+		this.setForecastList();
 	}
 
 	setSelectedTabNumber = value => {
