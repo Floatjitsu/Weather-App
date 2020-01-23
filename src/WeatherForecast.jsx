@@ -1,8 +1,9 @@
 import React from 'react';
-import {List, ListItem, Divider, ListItemText, AppBar, Tab, Tabs} from '@material-ui/core';
+import {AppBar, Tab, Tabs} from '@material-ui/core';
 import DateHandler from './dateHandler.js';
 import weatherData from './weatherData';
 import moment from 'moment';
+import WeatherForecastTimes from './WeatherForecastTimes';
 
 const dateHandler = new DateHandler();
 
@@ -10,19 +11,18 @@ class WeatherComponent extends React.Component {
 
 	componentDidMount = () => {
 		const tomorrow =
-			dateHandler
-				.reformatDateFromDisplayToApiFormat(
-					dateHandler.getTommorowsDate()
-				);
+			dateHandler.reformatDateFromDisplayToApiFormat(
+				dateHandler.getTommorowsDate()
+			);
 		weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
 			const test = weatherData.getWeatherForecast(this.props.value, tomorrow);
-			for (const forecast of test) {
-				if (forecast.time === '00:00') {
-					this.setState({
-						weatherTomorrow: forecast.weather.description
-					});
-				}
-			}
+			// for (const forecast of test) {
+			// 	if (forecast.time === '00:00') {
+			// 		this.setState({
+			// 			weatherTomorrow: forecast.weather.description
+			// 		});
+			// 	}
+			// }
 		});
 	}
 
@@ -47,27 +47,6 @@ class WeatherComponent extends React.Component {
 		})
 	}
 
-	renderForecastList = () => {
-		return (
-			<List>
-				<ListItem>
-					<ListItemText primary={this.state.weatherTomorrow} />
-				</ListItem>
-				<Divider />
-				<ListItem>
-					<ListItemText primary={this.state.weatherTwoDays} />
-				</ListItem>
-				<ListItem>
-					<ListItemText primary={this.state.weatherThreeDays} />
-				</ListItem>
-				<Divider />
-				<ListItem>
-					<ListItemText primary={this.state.weatherFourDays} />
-				</ListItem>
-			</List>
-		);
-	}
-
 	render() {
 		return (
 			<div>
@@ -82,7 +61,7 @@ class WeatherComponent extends React.Component {
 					</Tabs>
 				</AppBar>
 				<div className='weatherForecastList'>
-					{this.renderForecastList()}
+					<WeatherForecastTimes />
 				</div>
 			</div>
 		);
