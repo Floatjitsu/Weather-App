@@ -43,7 +43,7 @@ const loadWeatherForecastForCity = city => {
 				const jsonBody = JSON.parse(body);
 				weatherForecastForCity.city = city;
 				weatherForecastForCity.forecast = jsonBody.list;
-				resolve(weatherForecastForCity);
+				resolve();
 			} else {
 				reject(response.statusMessage);
 			}

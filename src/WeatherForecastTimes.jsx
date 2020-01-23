@@ -3,6 +3,10 @@ import {List, ListItem, Divider, ListItemText} from '@material-ui/core';
 
 class WeatherForecastTimes extends React.Component {
 	state = {
+
+	}
+
+	componentDidMount = () => {
 		
 	}
 
@@ -10,11 +14,11 @@ class WeatherForecastTimes extends React.Component {
 		return (
 			<List>
 				<ListItem>
-					<ListItemText primary={this.state.weatherTomorrow} />
+					<ListItemText primary={this.props.city} />
 				</ListItem>
 				<Divider />
 				<ListItem>
-					<ListItemText primary={this.state.weatherTwoDays} />
+					<ListItemText primary={this.props.day} />
 				</ListItem>
 				<ListItem>
 					<ListItemText primary={this.state.weatherThreeDays} />

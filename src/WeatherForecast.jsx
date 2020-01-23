@@ -15,29 +15,33 @@ class WeatherComponent extends React.Component {
 				dateHandler.getTommorowsDate()
 			);
 		weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
-			const test = weatherData.getWeatherForecast(this.props.value, tomorrow);
-			// for (const forecast of test) {
-			// 	if (forecast.time === '00:00') {
-			// 		this.setState({
-			// 			weatherTomorrow: forecast.weather.description
-			// 		});
-			// 	}
-			// }
+			console.log('Data loaded!');
+		}).catch(error => {
+			console.error(error);
 		});
 	}
 
 	componentDidUpdate = prevProps => {
 		if (prevProps.value !== this.props.value) {
 			this.setSelectedTabNumber(0);
+			weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
+				console.log('Data loaded!');
+			}).catch(error => {
+				console.error(error);
+			});
 		}
 	}
 
 	state = {
-		selectedTabNumber: 0
+		selectedTabNumber: 0,
+		selectedDay: dateHandler.reformatDateFromDisplayToApiFormat(
+						dateHandler.getTommorowsDate()
+					 )
 	}
 
 	handleTabChange = (event, newValue) => {
 		// console.log(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
+		this.setSelectedDay(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
 		this.setSelectedTabNumber(newValue);
 	}
 
@@ -45,6 +49,12 @@ class WeatherComponent extends React.Component {
 		this.setState({
 			selectedTabNumber: value
 		})
+	}
+
+	setSelectedDay = value => {
+		this.setState({
+			selectedDay: value
+		});
 	}
 
 	render() {
@@ -61,7 +71,7 @@ class WeatherComponent extends React.Component {
 					</Tabs>
 				</AppBar>
 				<div className='weatherForecastList'>
-					<WeatherForecastTimes />
+					<WeatherForecastTimes city={this.props.value} day={this.state.selectedDay} />
 				</div>
 			</div>
 		);
