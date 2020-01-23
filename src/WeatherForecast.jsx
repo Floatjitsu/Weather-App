@@ -8,11 +8,21 @@ const dateHandler = new DateHandler();
 
 class WeatherComponent extends React.Component {
 
-	componentWillMount = () => {
-		const tomorrow = dateHandler.reformatDateFromDisplayToApiFormat(dateHandler.getTommorowsDate());
-		weatherData.loadWeatherForecastForCity(this.props.value).then(result => {
+	componentDidMount = () => {
+		const tomorrow =
+			dateHandler
+				.reformatDateFromDisplayToApiFormat(
+					dateHandler.getTommorowsDate()
+				);
+		weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
 			const test = weatherData.getWeatherForecast(this.props.value, tomorrow);
-			console.log(test);
+			for (const forecast of test) {
+				if (forecast.time === '00:00') {
+					this.setState({
+						weatherTomorrow: forecast.weather.description
+					});
+				}
+			}
 		});
 	}
 
@@ -27,7 +37,7 @@ class WeatherComponent extends React.Component {
 	}
 
 	handleTabChange = (event, newValue) => {
-		console.log(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
+		// console.log(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
 		this.setSelectedTabNumber(newValue);
 	}
 
@@ -35,6 +45,27 @@ class WeatherComponent extends React.Component {
 		this.setState({
 			selectedTabNumber: value
 		})
+	}
+
+	renderForecastList = () => {
+		return (
+			<List>
+				<ListItem>
+					<ListItemText primary={this.state.weatherTomorrow} />
+				</ListItem>
+				<Divider />
+				<ListItem>
+					<ListItemText primary={this.state.weatherTwoDays} />
+				</ListItem>
+				<ListItem>
+					<ListItemText primary={this.state.weatherThreeDays} />
+				</ListItem>
+				<Divider />
+				<ListItem>
+					<ListItemText primary={this.state.weatherFourDays} />
+				</ListItem>
+			</List>
+		);
 	}
 
 	render() {
@@ -50,6 +81,9 @@ class WeatherComponent extends React.Component {
 						<Tab label={dateHandler.getFourDaysAfterTodaysDate()} />
 					</Tabs>
 				</AppBar>
+				<div className='weatherForecastList'>
+					{this.renderForecastList()}
+				</div>
 			</div>
 		);
 	}

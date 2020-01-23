@@ -63,3 +63,12 @@ body {
     font-size: 30px;
     font-family: 'Open Sans', sans-serif;
 }
+
+.weatherForecastList {
+    display: flex;
+    justify-content: left;
+}
+
+.WeatherForecastListItem {
+    font-family: 'Open Sans', sans-serif;
+}
