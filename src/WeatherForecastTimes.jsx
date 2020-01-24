@@ -1,6 +1,5 @@
 import React from 'react';
 import {List, ListItem, Divider, ListItemText} from '@material-ui/core';
-import weatherData from './weatherData';
 
 class WeatherForecastTimes extends React.Component {
 	state = {
@@ -21,6 +20,7 @@ class WeatherForecastTimes extends React.Component {
 				<ListItem>
 					<ListItemText primary={this.props.forecastList.nineAm} />
 				</ListItem>
+				<Divider />
 				<ListItem>
 					<ListItemText primary={this.props.forecastList.threePm} />
 				</ListItem>

@@ -2,10 +2,8 @@ import React from 'react';
 import {AppBar, Tab, Tabs} from '@material-ui/core';
 import DateHandler from './dateHandler.js';
 import weatherData from './weatherData';
-import moment from 'moment';
 import WeatherForecastTimes from './WeatherForecastTimes';
 
-const forecastTimes = ['03:00', '09:00', '15:00', '21:00'];
 const dateHandler = new DateHandler();
 
 class WeatherComponent extends React.Component {
@@ -22,7 +20,10 @@ class WeatherComponent extends React.Component {
 		if (prevProps.value !== this.props.value) {
 			this.setSelectedTabNumber(0);
 			weatherData.loadWeatherForecastForCity(this.props.value).then(() => {
-				this.setForecastList();
+				this.setSelectedDay(dateHandler.reformatDateFromDisplayToApiFormat(dateHandler.getTommorowsDate()))
+					.then(result => {
+						this.setForecastList();
+					});
 			}).catch(error => {
 				console.error(error);
 			});
@@ -38,9 +39,11 @@ class WeatherComponent extends React.Component {
 	}
 
 	handleTabChange = (event, newValue) => {
-		this.setSelectedDay(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent));
-		this.setSelectedTabNumber(newValue);
-		this.setForecastList();
+		this.setSelectedDay(dateHandler.reformatDateFromDisplayToApiFormat(event.currentTarget.textContent))
+			.then(() => {
+				this.setSelectedTabNumber(newValue);
+				this.setForecastList();
+			});
 	}
 
 	setSelectedTabNumber = value => {
@@ -50,17 +53,20 @@ class WeatherComponent extends React.Component {
 	}
 
 	setSelectedDay = value => {
-		this.setState({
-			selectedDay: value
+		return new Promise((resolve, reject) => {
+			this.setState({
+				selectedDay: value
+			});
+			resolve();
 		});
+
 	}
 
 	setForecastList = () => {
-		for (const time of forecastTimes) {
-			const forecast = weatherData.getWeatherForecastForCityDateTime(
-				this.props.value, this.state.selectedDay, time
-			);
-			this.setForecastListState(time, forecast.weather.description);
+		const forecast = weatherData.getWeatherForecastForCityDate(
+			this.props.value, this.state.selectedDay);
+		for (const forecastItem of forecast) {
+			this.setForecastListState(forecastItem.time, forecastItem.weather.description);
 		}
 	}
 
@@ -82,6 +88,8 @@ class WeatherComponent extends React.Component {
 			case '21:00':
 				forecastList.ninePm = weatherDescription;
 				this.setState({forecastList: forecastList});
+				break;
+			default:
 				break;
 		}
 	}

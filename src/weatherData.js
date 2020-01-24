@@ -1,12 +1,11 @@
 import request from 'request';
-import moment from 'moment';
 
 const apiUrl = 'https://api.openweathermap.org/data/2.5/';
 const currentWeatherUrlParam = 'weather';
 const forecastWeatherUrlParam = 'forecast';
 const metricUnitUrlParam = 'metric'; // To get temperature in C°
 const apiKey = '63adac7ad2e70d880b81ccda4407faeb';
-
+const forecastTimes = ['03:00', '09:00', '15:00', '21:00'];
 let weatherForecastForCity = {};
 
 const getCurrentWeatherForCity = city => {
@@ -49,37 +48,48 @@ const loadWeatherForecastForCity = city => {
 			}
 		});
 	});
-}
+};
 
 const getWeatherForecastForCityDateTime = (city, date, time) => {
-	const weatherForecastCity = _getWeatherForecastForCityDate(city, date);
+	const weatherForecastCity = getWeatherForecastForCityDate(city, date);
 	let result = {};
 	for (const forecast of weatherForecastCity) {
-		if (forecast.time == time) {
+		if (forecast.time === time) {
 			result = forecast;
 		}
 	}
 	return result;
-}
+};
 
-const _getWeatherForecastForCityDate = (city, date) => {
+const getWeatherForecastForCityDate = (city, date) => {
 	if (weatherForecastForCity.city === city) {
 		let result = [];
 		for (const forecast of weatherForecastForCity.forecast) {
-			if (forecast.dt_txt.includes(date)) {
+			if (forecast.dt_txt.includes(date) && _timeStringIncludesTime(forecast.dt_txt)) {
 				result.push(_extractDataFromForecastObject(forecast));
 			}
 		}
 		return result;
+	} else {
+		return [];
 	}
-	return [];
-}
+};
 
 const _extractDataFromForecastObject = forecastObject => {
 	return {
 		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
-		weather: forecastObject.weather[0]
+		weather: forecastObject.weather[0],
+		date: forecastObject.dt_txt
 	};
-}
+};
 
-export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecastForCityDateTime};
+const _timeStringIncludesTime = timeString => {
+	for (const time of forecastTimes) {
+		if (timeString.includes(time)) {
+			return true;
+		}
+	}
+	return false;
+};
+
+export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecastForCityDate, getWeatherForecastForCityDateTime};
