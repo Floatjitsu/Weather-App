@@ -104,7 +104,9 @@ class WeatherComponent extends React.Component {
 				</div>
 				<div>
 					<Fade in={true} timeout={1500}>
-						<WeatherImage value={this.state.weather}/>
+						<WeatherImage
+							value={this.state.weather}
+							imageStyle={{height: 100, width: 100}}/>
 					</Fade>
 				</div>
 				<div className='weatherComponentWeatherDescription'>

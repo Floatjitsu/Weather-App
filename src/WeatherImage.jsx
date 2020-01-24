@@ -7,51 +7,50 @@ import FoggyImage from './weatherImages/foggy.svg';
 import MistImage from './weatherImages/mist.svg';
 import DrizzleImage from './weatherImages/drizzle.svg';
 
-const imageStyle = {height: 100, width: 100};
-
 export default class WeatherImage extends React.Component {
+
 	render() {
 		switch (this.props.value) {
 			case 'Rain':
 				return (
 					<img src={RainyImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				 );
 			case 'Clear':
 				return (
 					<img src={SunnyImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				 );
 			case 'Snow':
 				return (
 					<img src={SnowImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);
 			case 'Clouds':
 				return (
 					<img src={CloudyImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);
 			case 'Fog':
 				return (
 					<img src={FoggyImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);
 			case 'Mist':
 				return (
 					<img src={MistImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);
 			case 'Drizzle':
 				return (
 					<img src={DrizzleImage}
-						 style={imageStyle}
+						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);
 			default:
