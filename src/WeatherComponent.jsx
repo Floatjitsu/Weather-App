@@ -4,6 +4,7 @@ import weatherData from './weatherData';
 import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded';
 import WeatherImage from './WeatherImage';
 import WeatherForecast from './WeatherForecast';
+import Helper from './helperFunctions';
 
 class WeatherComponent extends React.Component {
 	constructor(props) {
@@ -65,16 +66,9 @@ class WeatherComponent extends React.Component {
 
 	setWeatherDescriptionState = weatherDescription => {
 		this.setState({
-			weatherDescription: this.capitalizeWeatherDescription(weatherDescription)
+			/* API delivers weather description in none capitalized form */
+			weatherDescription: Helper.capitalizeSentence(weatherDescription)
 		});
-	}
-
-	/* API delivers weather description in no capitalized form */
-	capitalizeWeatherDescription = weatherDescription => {
-		return weatherDescription.toLowerCase()
-			.split(' ')
-			.map(s => s.charAt(0).toUpperCase() + s.substr(1))
-			.join(' ');
 	}
 
 	render() {
