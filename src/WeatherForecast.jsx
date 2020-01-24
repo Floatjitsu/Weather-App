@@ -3,6 +3,7 @@ import {AppBar, Tab, Tabs} from '@material-ui/core';
 import DateHandler from './dateHandler.js';
 import weatherData from './weatherData';
 import WeatherForecastTimes from './WeatherForecastTimes';
+import Helper from './helperFunctions';
 
 const dateHandler = new DateHandler();
 
@@ -74,19 +75,19 @@ class WeatherComponent extends React.Component {
 		let forecastList = this.state.forecastList;
 		switch (time) {
 			case '03:00':
-				forecastList.threeAm = weatherDescription;
+				forecastList.threeAm = Helper.capitalizeSentence(weatherDescription);
 				this.setState({forecastList: forecastList});
 				break;
 			case '09:00':
-				forecastList.nineAm = weatherDescription;
+				forecastList.nineAm = Helper.capitalizeSentence(weatherDescription);
 				this.setState({forecastList: forecastList});
 				break;
 			case '15:00':
-				forecastList.threePm = weatherDescription;
+				forecastList.threePm = Helper.capitalizeSentence(weatherDescription);
 				this.setState({forecastList: forecastList});
 				break;
 			case '21:00':
-				forecastList.ninePm = weatherDescription;
+				forecastList.ninePm = Helper.capitalizeSentence(weatherDescription);
 				this.setState({forecastList: forecastList});
 				break;
 			default:
