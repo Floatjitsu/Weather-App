@@ -50,17 +50,6 @@ const loadWeatherForecastForCity = city => {
 	});
 };
 
-const getWeatherForecastForCityDateTime = (city, date, time) => {
-	const weatherForecastCity = getWeatherForecastForCityDate(city, date);
-	let result = {};
-	for (const forecast of weatherForecastCity) {
-		if (forecast.time === time) {
-			result = forecast;
-		}
-	}
-	return result;
-};
-
 const getWeatherForecastForCityDate = (city, date) => {
 	if (weatherForecastForCity.city === city) {
 		let result = [];
@@ -78,8 +67,8 @@ const getWeatherForecastForCityDate = (city, date) => {
 const _extractDataFromForecastObject = forecastObject => {
 	return {
 		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
-		weather: forecastObject.weather[0],
-		date: forecastObject.dt_txt
+		weatherMain: forecastObject.weather[0].main,
+		weatherDescription: forecastObject.weather[0].description
 	};
 };
 
@@ -92,4 +81,4 @@ const _timeStringIncludesTime = timeString => {
 	return false;
 };
 
-export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecastForCityDate, getWeatherForecastForCityDateTime};
+export default {getCurrentWeatherForCity, loadWeatherForecastForCity, getWeatherForecastForCityDate};
