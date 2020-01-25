@@ -101,6 +101,7 @@ class WeatherComponent extends React.Component {
 		forecastList[timeString].time = forecast.time;
 		forecastList[timeString].description = Helper.capitalizeSentence(forecast.weatherDescription);
 		forecastList[timeString].weatherMain = forecast.weatherMain;
+		forecastList[timeString].temperature = forecast.temperature;
 		this.setState({forecastList: forecastList});
 	}
 

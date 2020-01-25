@@ -15,14 +15,17 @@ class WeatherForecastTimes extends React.Component {
 		return (
 			<List>
 				<ListItem>
+					<div>
+						{this.props.forecastList.threeAm.temperature}
+					</div>
+					<ListItemText
+						primary={this.props.forecastList.threeAm.time}
+						secondary={this.props.forecastList.threeAm.description} />
 					<div style={{marginRight: 15}}>
 						<WeatherImage
 							value={this.props.forecastList.threeAm.weatherMain}
 							imageStyle={{height: 35, width: 35}} />
 					</div>
-					<ListItemText
-						primary={this.props.forecastList.threeAm.time}
-						secondary={this.props.forecastList.threeAm.description} />
 				</ListItem>
 				<Divider />
 				<ListItem>

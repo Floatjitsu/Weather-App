@@ -68,7 +68,8 @@ const _extractDataFromForecastObject = forecastObject => {
 	return {
 		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
 		weatherMain: forecastObject.weather[0].main,
-		weatherDescription: forecastObject.weather[0].description
+		weatherDescription: forecastObject.weather[0].description,
+		temperature: forecastObject.main.temp + ' C°'
 	};
 };
 
