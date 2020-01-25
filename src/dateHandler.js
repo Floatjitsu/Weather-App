@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-class DateHandler {
+export default class DateHandler {
 
 	dateDisplayFormat = 'DD/MM/YYYY'
 	apiDateFormat = 'YYYY-MM-DD'
@@ -21,9 +21,9 @@ class DateHandler {
 		return moment(moment().add('4', 'day')).format(this.dateDisplayFormat);
 	}
 
-	reformatDateFromDisplayToApiFormat = date => {
-		return moment(date, this.dateDisplayFormat).format(this.apiDateFormat);
+	reformatDate = {
+		fromDisplayToApiFormat: date => {
+			return moment(date, this.dateDisplayFormat).format(this.apiDateFormat);
+		}
 	}
 }
-
-export default DateHandler;
