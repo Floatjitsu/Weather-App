@@ -48,7 +48,7 @@ class WeatherComponent extends React.Component {
 
 	setErrorState = error => {
 		this.setState({
-			error: error
+			error: error === 'Not Found' ? 'Could not find this city' : error
 		});
 	}
 
