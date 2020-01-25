@@ -6,6 +6,7 @@ import CloudyImage from './weatherImages/cloudy.svg';
 import FoggyImage from './weatherImages/foggy.svg';
 import MistImage from './weatherImages/mist.svg';
 import DrizzleImage from './weatherImages/drizzle.svg';
+import ClearNightImage from './weatherImages/clear-night.svg';
 
 export default class WeatherImage extends React.Component {
 
@@ -50,6 +51,12 @@ export default class WeatherImage extends React.Component {
 			case 'Drizzle':
 				return (
 					<img src={DrizzleImage}
+						 style={this.props.imageStyle}
+						 alt={this.props.value} />
+				);
+			case 'Clear Night':
+				return (
+					<img src={ClearNightImage}
 						 style={this.props.imageStyle}
 						 alt={this.props.value} />
 				);

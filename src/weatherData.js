@@ -65,12 +65,17 @@ const getWeatherForecastForCityDate = (city, date) => {
 };
 
 const _extractDataFromForecastObject = forecastObject => {
-	return {
+	let newForecastObject = {
 		time: forecastObject.dt_txt.split(' ')[1].slice(0, 5),
-		weatherMain: forecastObject.weather[0].main,
 		weatherDescription: forecastObject.weather[0].description,
 		temperature: forecastObject.main.temp
-	};
+	}
+	if (newForecastObject.time === '21:00' && newForecastObject.weatherDescription === 'clear sky') {
+		newForecastObject.weatherMain = forecastObject.weather[0].main + ' Night';
+	} else {
+		newForecastObject.weatherMain = forecastObject.weather[0].main;
+	}
+	return newForecastObject;
 };
 
 const _timeStringIncludesTime = timeString => {
