@@ -67,40 +67,35 @@ class WeatherComponent extends React.Component {
 		const forecast = weatherData.getWeatherForecastForCityDate(
 			this.props.value, this.state.selectedDay);
 		for (const forecastItem of forecast) {
-			this.setForecastListState(forecastItem);
+			this.setForecastListItem(forecastItem);
 		}
 	}
 
-	setForecastListState = (forecast) => {
-		let forecastList = this.state.forecastList;
+	setForecastListItem = forecast => {
 		switch (forecast.time) {
 			case '03:00':
-				forecastList.threeAm.time = forecast.time;
-				forecastList.threeAm.description = Helper.capitalizeSentence(forecast.weatherDescription);
-				forecastList.threeAm.weatherMain = forecast.weatherMain;
-				this.setState({forecastList: forecastList});
+				this.setForecastListState(forecast, 'threeAm');
 				break;
 			case '09:00':
-				forecastList.nineAm.time = forecast.time;
-				forecastList.nineAm.description = Helper.capitalizeSentence(forecast.weatherDescription);
-				forecastList.nineAm.weatherMain = forecast.weatherMain;
-				this.setState({forecastList: forecastList});
+				this.setForecastListState(forecast, 'nineAm');
 				break;
 			case '15:00':
-				forecastList.threePm.time = forecast.time;
-				forecastList.threePm.description = Helper.capitalizeSentence(forecast.weatherDescription);
-				forecastList.threePm.weatherMain = forecast.weatherMain;
-				this.setState({forecastList: forecastList});
+				this.setForecastListState(forecast, 'threePm');
 				break;
 			case '21:00':
-				forecastList.ninePm.time = forecast.time;
-				forecastList.ninePm.description = Helper.capitalizeSentence(forecast.weatherDescription);
-				forecastList.ninePm.weatherMain = forecast.weatherMain;
-				this.setState({forecastList: forecastList});
+				this.setForecastListState(forecast, 'ninePm');
 				break;
 			default:
 				break;
 		}
+	}
+
+	setForecastListState = (forecast, timeString) => {
+		let forecastList = this.state.forecastList;
+		forecastList[timeString].time = forecast.time;
+		forecastList[timeString].description = Helper.capitalizeSentence(forecast.weatherDescription);
+		forecastList[timeString].weatherMain = forecast.weatherMain;
+		this.setState({forecastList: forecastList});
 	}
 
 	render() {
