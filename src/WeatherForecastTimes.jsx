@@ -30,7 +30,7 @@ class WeatherForecastTimes extends React.Component {
 							imageStyle={{height: 35, width: 35}} />
 					</div>
 					<ListItemText
-						primary={this.props.forecastList.nineAm.time}
+						primary={this.props.forecastList.nineAm.temperature}
 						secondary={this.props.forecastList.nineAm.description} />
 				</ListItem>
 				<Divider />
@@ -44,7 +44,7 @@ class WeatherForecastTimes extends React.Component {
 							imageStyle={{height: 35, width: 35}} />
 					</div>
 					<ListItemText
-						primary={this.props.forecastList.threePm.time}
+						primary={this.props.forecastList.threePm.temperature}
 						secondary={this.props.forecastList.threePm.description} />
 				</ListItem>
 				<Divider />
@@ -58,7 +58,7 @@ class WeatherForecastTimes extends React.Component {
 							imageStyle={{height: 35, width: 35}} />
 					</div>
 					<ListItemText
-						primary={this.props.forecastList.ninePm.time}
+						primary={this.props.forecastList.ninePm.temperature}
 						secondary={this.props.forecastList.ninePm.description} />
 				</ListItem>
 			</List>
