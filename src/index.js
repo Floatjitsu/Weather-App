@@ -36,7 +36,16 @@ class App extends React.Component {
 	}
 }
 
+const Footer = () => (
+	<footer className='footer'>
+		<p>
+			Weather Data provided by &nbsp;
+			<a href='https://openweathermap.org/'>OpenWeather.org</a>
+		</p>
+	</footer>
+);
+
 ReactDOM.render(
-  <App />,
+  [<App />, <Footer />],
   document.getElementById('root')
 );

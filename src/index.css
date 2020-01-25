@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .app {
@@ -10,6 +21,7 @@ body {
     margin-top: 25px;
     margin-bottom: 25px;
     width: 100%;
+    flex: 1 0 auto;
 }
 
 .searchContainer {
@@ -71,4 +83,10 @@ body {
 
 .WeatherForecastListItem {
     font-family: 'Open Sans', sans-serif;
+}
+
+.footer {
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 14px;
 }
