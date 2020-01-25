@@ -6,6 +6,12 @@ import WeatherForecastTimes from './WeatherForecastTimes';
 import Helper from './helperFunctions';
 
 const dateHandler = new DateHandler();
+const timeValues = {
+	threeAm: '03:00',
+	nineAm: '09:00',
+	threePm: '15:00',
+	ninePm: '21:00'
+};
 
 class WeatherComponent extends React.Component {
 
@@ -73,16 +79,16 @@ class WeatherComponent extends React.Component {
 
 	setForecastListItem = forecast => {
 		switch (forecast.time) {
-			case '03:00':
+			case timeValues.threeAm:
 				this.setForecastListState(forecast, 'threeAm');
 				break;
-			case '09:00':
+			case timeValues.nineAm:
 				this.setForecastListState(forecast, 'nineAm');
 				break;
-			case '15:00':
+			case timeValues.threePm:
 				this.setForecastListState(forecast, 'threePm');
 				break;
-			case '21:00':
+			case timeValues.ninePm:
 				this.setForecastListState(forecast, 'ninePm');
 				break;
 			default:
