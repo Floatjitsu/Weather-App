@@ -36,7 +36,7 @@ class WeatherComponent extends React.Component {
 	setTemperatureForCurrentCity = () => {
 		return new Promise((resolve, reject) => {
 			weatherData.getCurrentWeatherForCity(this.props.value).then(result => {
-				this.setTemperatureNowState(result.temperatureNow.toFixed(1) + ' C°');
+				this.setTemperatureNowState(Helper.convertNumberToOneDecimal(result.temperatureNow) + ' C°');
 				this.setWeatherState(result.weather);
 				this.setWeatherDescriptionState(result.weatherDescription);
 				resolve();
