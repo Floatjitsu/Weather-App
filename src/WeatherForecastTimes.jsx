@@ -3,32 +3,27 @@ import {List, ListItem, Divider, ListItemText} from '@material-ui/core';
 import WeatherImage from './WeatherImage';
 
 class WeatherForecastTimes extends React.Component {
-	state = {
-
-	}
-
-	componentDidMount = () => {
-
-	}
-
 	render() {
 		return (
 			<List>
 				<ListItem>
-					<div>
-						{this.props.forecastList.threeAm.temperature}
+					<div style={{marginRight: 15}}>
+						{this.props.forecastList.threeAm.time}
 					</div>
-					<ListItemText
-						primary={this.props.forecastList.threeAm.time}
-						secondary={this.props.forecastList.threeAm.description} />
 					<div style={{marginRight: 15}}>
 						<WeatherImage
 							value={this.props.forecastList.threeAm.weatherMain}
 							imageStyle={{height: 35, width: 35}} />
 					</div>
+					<ListItemText
+						primary={this.props.forecastList.threeAm.temperature}
+						secondary={this.props.forecastList.threeAm.description} />
 				</ListItem>
 				<Divider />
 				<ListItem>
+					<div style={{marginRight: 15}}>
+						{this.props.forecastList.nineAm.time}
+					</div>
 					<div style={{marginRight: 15}}>
 						<WeatherImage
 							value={this.props.forecastList.nineAm.weatherMain}
@@ -41,6 +36,9 @@ class WeatherForecastTimes extends React.Component {
 				<Divider />
 				<ListItem>
 					<div style={{marginRight: 15}}>
+						{this.props.forecastList.threePm.time}
+					</div>
+					<div style={{marginRight: 15}}>
 						<WeatherImage
 							value={this.props.forecastList.threePm.weatherMain}
 							imageStyle={{height: 35, width: 35}} />
@@ -51,6 +49,9 @@ class WeatherForecastTimes extends React.Component {
 				</ListItem>
 				<Divider />
 				<ListItem>
+					<div style={{marginRight: 15}}>
+						{this.props.forecastList.ninePm.time}
+					</div>
 					<div style={{marginRight: 15}}>
 						<WeatherImage
 							value={this.props.forecastList.ninePm.weatherMain}

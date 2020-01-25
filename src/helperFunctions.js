@@ -5,4 +5,8 @@ const capitalizeSentence = sentence => {
 		.join(' ');
 };
 
-export default {capitalizeSentence};
+const convertNumberToOneDecimal = number => {
+	return number.toFixed(1);
+};
+
+export default {capitalizeSentence, convertNumberToOneDecimal};
