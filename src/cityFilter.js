@@ -1,6 +1,6 @@
 import cities from './cities.json';
 import crossfilter from 'crossfilter2';
-import alphabetRepresentations from './letterRepresentations.json';
+import alphabetRepresentations from './letterRepresentations';
 
 const maxFilterResults = 25;
 
