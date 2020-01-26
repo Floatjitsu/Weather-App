@@ -87,29 +87,29 @@ class WeatherComponent extends React.Component {
 		return (
 			<div className='weatherComponentContainer'>
 				<div className='weatherComponentCity'>
-					<Fade in={true} timeout={1100}>
+					<Fade in timeout={1100}>
 						<p>{this.props.value}</p>
 					</Fade>
 				</div>
 				<div className='weatherComponentDegree'>
-					<Fade in={true} timeout={1300}>
+					<Fade in timeout={1300}>
 						<p>{this.state.temperatureNow}</p>
 					</Fade>
 				</div>
 				<div>
-					<Fade in={true} timeout={1500}>
+					<Fade in timeout={1500}>
 						<WeatherImage
 							value={this.state.weather}
 							imageStyle={{height: 100, width: 100}}/>
 					</Fade>
 				</div>
 				<div className='weatherComponentWeatherDescription'>
-					<Fade in={true} timeout={1700}>
+					<Fade in timeout={1700}>
 						<p>{this.state.weatherDescription}</p>
 					</Fade>
 				</div>
 				<div className='weatherComponentForecast'>
-					<Fade in={true} timeout={1900}>
+					<Fade in timeout={1900}>
 						<div> <WeatherForecast value={this.props.value}/> </div>
 					</Fade>
 				</div>
