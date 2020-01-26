@@ -22,7 +22,7 @@ const getCurrentCityOfUser = new Promise((resolve, reject) => {
 });
 
 class SearchBar extends React.Component {
-	componentDidMount() {
+	componentDidMount = () => {
 		getCurrentCityOfUser.then(result => {
 			this._asyncRequest = null;
 			this.setState({
@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
 		});
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount = () => {
 	    if (this._asyncRequest) {
 	      this._asyncRequest.cancel();
 	    }
@@ -50,10 +50,11 @@ class SearchBar extends React.Component {
 	}
 
 	state = {
+		selectedCity: '',
 		autoCompleteOptions: ['Type in city...']
 	}
 
-	setAutocompleteOptions = (newAutoCompleteOptions) => {
+	setAutocompleteOptions = newAutoCompleteOptions => {
 		this.setState({autoCompleteOptions: newAutoCompleteOptions});
 	}
 
@@ -65,51 +66,32 @@ class SearchBar extends React.Component {
 
 	// Output format for the Autocomplete: 'City', 'Subcountry', 'Country'
 	// Example: London, England, United Kingdom
-	getAutocompleteCitiesInOutputFormat(cities) {
+	getAutocompleteCitiesInOutputFormat = cities => {
 		return cities.map(cityObject => {
 			return cityObject.name + ', ' + cityObject.subcountry + ', ' + cityObject.country;
 		});
 	}
 
-	onSearchButtonClick() {
+	onSearchButtonClick = () => {
 		this.props.onSearch(this.state.selectedCity.split(',')[0]);
 	}
 
 	render() {
-		if (this.state.selectedCity === null) {
-			return (
-				<div className='searchContainer'>
-					<div className='autoComplete'>
-					<AutocompleteCity
-						inputChange={this.onInputChange}
-						autoCompleteOptions={this.state.autoCompleteOptions} />
-					</div>
-					<div className='searchLogo'>
-						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
-							<SearchIcon />
-						</Fab>
-					</div>
+		return (
+			<div className='searchContainer'>
+				<div className='autoComplete'>
+				<AutocompleteCity
+					value={this.state.selectedCity}
+					inputChange={this.onInputChange}
+					autoCompleteOptions={this.state.autoCompleteOptions} />
 				</div>
-			);
-
-		} else {
-			return (
-				<div className='searchContainer'>
-					<div className='autoComplete'>
-					<AutocompleteCity
-						value={this.state.selectedCity}
-						inputChange={this.onInputChange}
-						autoCompleteOptions={this.state.autoCompleteOptions} />
-					</div>
-					<div className='searchLogo'>
-						<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
-							<SearchIcon />
-						</Fab>
-					</div>
+				<div className='searchLogo'>
+					<Fab color="primary" aria-label="add" onClick={this.onSearchButtonClick.bind(this)}>
+						<SearchIcon />
+					</Fab>
 				</div>
-			);
-		}
-
+			</div>
+		);
 	}
 }
 
