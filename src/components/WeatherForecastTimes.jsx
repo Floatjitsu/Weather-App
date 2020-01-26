@@ -6,7 +6,7 @@ class WeatherForecastTimes extends React.Component {
 	render() {
 		return (
 			<List>
-				<ListItem>
+				<ListItem key={'threeAm'}>
 					<div style={{marginRight: 15}}>
 						{this.props.forecastList.threeAm.time}
 					</div>
@@ -20,7 +20,7 @@ class WeatherForecastTimes extends React.Component {
 						secondary={this.props.forecastList.threeAm.description} />
 				</ListItem>
 				<Divider />
-				<ListItem>
+				<ListItem key={'nineAm'}>
 					<div style={{marginRight: 15}}>
 						{this.props.forecastList.nineAm.time}
 					</div>
@@ -34,7 +34,7 @@ class WeatherForecastTimes extends React.Component {
 						secondary={this.props.forecastList.nineAm.description} />
 				</ListItem>
 				<Divider />
-				<ListItem>
+				<ListItem key={'threePm'}>
 					<div style={{marginRight: 15}}>
 						{this.props.forecastList.threePm.time}
 					</div>
@@ -48,7 +48,7 @@ class WeatherForecastTimes extends React.Component {
 						secondary={this.props.forecastList.threePm.description} />
 				</ListItem>
 				<Divider />
-				<ListItem>
+				<ListItem key={'ninePm'}>
 					<div style={{marginRight: 15}}>
 						{this.props.forecastList.ninePm.time}
 					</div>
