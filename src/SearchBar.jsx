@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import request from 'request';
 import {getCitiesStartsWithValue} from './cityFilter.js';
+import Helper from './helperFunctions';
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {
@@ -42,14 +43,10 @@ class SearchBar extends React.Component {
 		this.setAutocompleteOptions(['Type in city...']);
 		this.setSelectedCity('');
 		if (value.length > 0) {
-			const cityFilter = getCitiesStartsWithValue(this.capitalizeString(value));
+			const cityFilter = getCitiesStartsWithValue(Helper.capitalizeSentence(value));
 			this.setSelectedCity(value);
 			this.setAutocompleteOptions(this.getAutocompleteCitiesInOutputFormat(cityFilter));
 		}
-	}
-
-	capitalizeString = (stringToCapitalize) => {
-		return stringToCapitalize.charAt(0).toUpperCase() + stringToCapitalize.slice(1);
 	}
 
 	state = {
