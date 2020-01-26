@@ -3,8 +3,8 @@ import AutocompleteCity from './AutocompleteCity';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import request from 'request';
-import {getCitiesStartsWithValue} from './cityFilter';
-import Helper from './helperFunctions';
+import {getCitiesStartsWithValue} from '../modules/cityFilter';
+import Helper from '../modules/helperFunctions';
 
 const getCurrentCityOfUser = new Promise((resolve, reject) => {
 	request('https://freegeoip.app/json/', (error, response, body) => {

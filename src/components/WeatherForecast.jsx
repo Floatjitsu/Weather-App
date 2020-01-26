@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppBar, Tab, Tabs} from '@material-ui/core';
-import DateHandler from './dateHandler.js';
-import weatherData from './weatherData';
+import DateHandler from '../modules/dateHandler.js';
+import weatherData from '../modules/weatherData';
 import WeatherForecastTimes from './WeatherForecastTimes';
-import Helper from './helperFunctions';
+import Helper from '../modules/helperFunctions';
 
 const dateHandler = new DateHandler();
 const timeValues = {

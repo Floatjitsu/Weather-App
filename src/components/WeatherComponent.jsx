@@ -1,10 +1,10 @@
 import React from 'react';
 import Fade from '@material-ui/core/Fade';
-import weatherData from './weatherData';
+import weatherData from '../modules/weatherData';
 import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded';
 import WeatherImage from './WeatherImage';
 import WeatherForecast from './WeatherForecast';
-import Helper from './helperFunctions';
+import Helper from '../modules/helperFunctions';
 
 class WeatherComponent extends React.Component {
 	constructor(props) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import WeatherComponent from './WeatherComponent';
-import SearchBar from './SearchBar';
+import WeatherComponent from './components/WeatherComponent';
+import SearchBar from './components/SearchBar';
 
 class App extends React.Component {
 	state = {

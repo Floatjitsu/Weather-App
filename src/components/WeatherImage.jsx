@@ -1,12 +1,12 @@
 import React from 'react';
-import RainyImage from './weatherImages/rainy.svg';
-import SunnyImage from './weatherImages/sun.svg';
-import SnowImage from './weatherImages/snow.svg';
-import CloudyImage from './weatherImages/cloudy.svg';
-import FoggyImage from './weatherImages/foggy.svg';
-import MistImage from './weatherImages/mist.svg';
-import DrizzleImage from './weatherImages/drizzle.svg';
-import ClearNightImage from './weatherImages/clear-night.svg';
+import RainyImage from '../weatherImages/rainy.svg';
+import SunnyImage from '../weatherImages/sun.svg';
+import SnowImage from '../weatherImages/snow.svg';
+import CloudyImage from '../weatherImages/cloudy.svg';
+import FoggyImage from '../weatherImages/foggy.svg';
+import MistImage from '../weatherImages/mist.svg';
+import DrizzleImage from '../weatherImages/drizzle.svg';
+import ClearNightImage from '../weatherImages/clear-night.svg';
 
 export default class WeatherImage extends React.Component {
 
