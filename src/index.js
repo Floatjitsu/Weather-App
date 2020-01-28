@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import WeatherComponent from './components/WeatherComponent';
 import SearchBar from './components/SearchBar';
@@ -16,12 +17,12 @@ class App extends React.Component {
 	render() {
 		return (
 			this.state.city === '' ?
-				<div className='app'>
+				<div>
 					<SearchBar
 						onSearch={this.onSearchButtonClick.bind(this)}/>
 				</div>
 				:
-				<div className='app'>
+				<div>
 					<SearchBar
 						onSearch={this.onSearchButtonClick.bind(this)}/>
 					<WeatherComponent value={this.state.city}/>
@@ -29,6 +30,14 @@ class App extends React.Component {
 		);
 	}
 }
+
+const Routing = () => (
+	<Router>
+		<div className='app'>
+			<Route exact path='/' component={App} />
+		</div>
+	</Router>
+);
 
 const Footer = () => (
 	<footer className='footer'>
@@ -40,6 +49,6 @@ const Footer = () => (
 );
 
 ReactDOM.render(
-  [<App />, <Footer />],
+  [<Routing />, <Footer />],
   document.getElementById('root')
 );
