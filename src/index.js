@@ -6,7 +6,6 @@ import WeatherComponent from './components/WeatherComponent';
 import SearchBar from './components/SearchBar';
 import AboutComponent from './components/AboutComponent';
 
-
 class App extends React.Component {
 	state = {
 		city: ''
@@ -41,8 +40,10 @@ const Routing = () => (
 		</div>
 		<footer className='footer'>
 			<p>
-				<Link to='/about'> About </Link>
-			</p>
+				<Link to='/about'>
+					About
+				 </Link>
+			 </p>
 		</footer>
 	</Router>
 );

@@ -90,3 +90,24 @@ body {
     text-align: right;
     font-size: 14px;
 }
+
+.aboutList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+li.aboutListItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+hr.aboutListDivider {
+    width: 200px;
+    border-top: 1px solid #979e9b;
+    opacity: 0.2;
+}
