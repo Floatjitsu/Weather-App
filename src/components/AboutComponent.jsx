@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import DevPic from '../images/dev-avatar.jpg';
+import OpenWeatherLogo from '../images/open-weather-logo.jpg';
 
 export default class AboutComponent extends React.Component {
 
@@ -33,6 +34,15 @@ export default class AboutComponent extends React.Component {
 					<li className='aboutListItem'>
 						<EmailIcon />
 						<div style={{marginLeft: 10}}> timur.celik@gmx.de </div>
+					</li>
+					<li className='aboutListItem'>
+						<div style={{fontSize: 20, marginTop: 20}}> Weather Data </div>
+					</li>
+					<hr className='aboutListDivider' />
+					<li className='aboutListItem'>
+						<a href='https://openweathermap.org/'>
+							<img src={OpenWeatherLogo} width='150' height='70' alt='Open Weather'/>
+						</a>
 					</li>
 				</ul>
 			</div>
