@@ -4,6 +4,8 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import WeatherComponent from './components/WeatherComponent';
 import SearchBar from './components/SearchBar';
+import AboutComponent from './components/AboutComponent';
+
 
 class App extends React.Component {
 	state = {
@@ -35,20 +37,17 @@ const Routing = () => (
 	<Router>
 		<div className='app'>
 			<Route exact path='/' component={App} />
+			<Route path='/about' component={AboutComponent} />
 		</div>
+		<footer className='footer'>
+			<p>
+				<Link to='/about'> About </Link>
+			</p>
+		</footer>
 	</Router>
 );
 
-const Footer = () => (
-	<footer className='footer'>
-		<p>
-			Weather Data provided by &nbsp;
-			<a href='https://openweathermap.org/'>OpenWeather.org</a>
-		</p>
-	</footer>
-);
-
 ReactDOM.render(
-  [<Routing />, <Footer />],
+  [<Routing />],
   document.getElementById('root')
 );
