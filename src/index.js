@@ -5,6 +5,8 @@ import './index.css';
 import WeatherComponent from './components/WeatherComponent';
 import SearchBar from './components/SearchBar';
 import AboutComponent from './components/AboutComponent';
+import InfoIcon from '@material-ui/icons/Info';
+import HomeIcon from '@material-ui/icons/Home';
 
 class App extends React.Component {
 	state = {
@@ -40,8 +42,11 @@ const Routing = () => (
 		</div>
 		<footer className='footer'>
 			<p>
+				<Link to='/'>
+					<HomeIcon color='default' />
+				</Link>
 				<Link to='/about'>
-					About
+					<InfoIcon color='default' />
 				 </Link>
 			 </p>
 		</footer>
