@@ -112,10 +112,10 @@ class WeatherComponent extends React.Component {
 					<Tabs
 						value={this.state.selectedTabNumber}
 						onChange={this.handleTabChange.bind(this)}>
-						<Tab label={dateHandler.getTommorowsDate()} />
-						<Tab label={dateHandler.getTwoDaysAfterTodaysDate()} />
-						<Tab label={dateHandler.getThreeDaysAfterTodaysDate()} />
-						<Tab label={dateHandler.getFourDaysAfterTodaysDate()} />
+						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getTommorowsDate()}/>
+						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getTwoDaysAfterTodaysDate()} />
+						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getThreeDaysAfterTodaysDate()} />
+						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getFourDaysAfterTodaysDate()} />
 					</Tabs>
 				</AppBar>
 				<div className='weatherForecastList'>

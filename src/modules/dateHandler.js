@@ -6,19 +6,19 @@ export default class DateHandler {
 	apiDateFormat = 'YYYY-MM-DD'
 
 	getTommorowsDate = () => {
-		return moment(moment().add('1', 'day')).format(this.dateDisplayFormat);
+		return 'Sunday \n' + moment(moment().add('1', 'day')).format(this.dateDisplayFormat);
 	}
 
 	getTwoDaysAfterTodaysDate = () => {
-		return moment(moment().add('2', 'day')).format(this.dateDisplayFormat);
+		return 'Monday \n' + moment(moment().add('2', 'day')).format(this.dateDisplayFormat);
 	}
 
 	getThreeDaysAfterTodaysDate = () => {
-		return moment(moment().add('3', 'day')).format(this.dateDisplayFormat);
+		return 'Tuesday \n' + moment(moment().add('3', 'day')).format(this.dateDisplayFormat);
 	}
 
 	getFourDaysAfterTodaysDate = () => {
-		return moment(moment().add('4', 'day')).format(this.dateDisplayFormat);
+		return 'Wednesday \n' + moment(moment().add('4', 'day')).format(this.dateDisplayFormat);
 	}
 
 	reformatDate = {
