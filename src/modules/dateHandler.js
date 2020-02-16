@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 const _getTommorowsWeekday = () => {
-	return moment(moment().add('1', 'day')).format('dddd') + ' ';
+	return moment(moment().add('1', 'day')).format('dddd');
 };
 
 const _getTwoDaysAfterTodaysWeekday = () => {
@@ -20,6 +20,10 @@ export default class DateHandler {
 
 	dateDisplayFormat = 'DD/MM/YYYY'
 	apiDateFormat = 'YYYY-MM-DD'
+
+	getTodaysDate = () => {
+		return 'Today' + '\n' + moment().format(this.dateDisplayFormat);
+	}
 
 	getTommorowsDate = () => {
 		return _getTommorowsWeekday() + '\n' + moment(moment().add('1', 'day')).format(this.dateDisplayFormat);

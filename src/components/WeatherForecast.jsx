@@ -41,7 +41,7 @@ class WeatherComponent extends React.Component {
 	state = {
 		selectedTabNumber: 0,
 		selectedDay: dateHandler.reformatDate.fromDisplayToApiFormat(
-						dateHandler.getTommorowsDate()
+						dateHandler.getTodaysDate()
 					),
 		forecastList: {threeAm: {}, nineAm: {}, threePm: {}, ninePm: {}}
 	}
@@ -113,6 +113,11 @@ class WeatherComponent extends React.Component {
 					<Tabs
 						value={this.state.selectedTabNumber}
 						onChange={this.handleTabChange.bind(this)}>
+						<Tab label= {
+							<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+								{dateHandler.getTodaysDate()}
+							</Typography>
+							}/>
 						<Tab label={
 								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
 									{dateHandler.getTommorowsDate()}
