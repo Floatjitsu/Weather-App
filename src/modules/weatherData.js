@@ -70,7 +70,7 @@ const _extractDataFromForecastObject = forecastObject => {
 		weatherDescription: forecastObject.weather[0].description,
 		temperature: forecastObject.main.temp
 	}
-	if (newForecastObject.time === '21:00' && newForecastObject.weatherDescription === 'clear sky') {
+	if ((newForecastObject.time === '21:00' || newForecastObject.time === '03:00') && newForecastObject.weatherDescription === 'clear sky') {
 		newForecastObject.weatherMain = forecastObject.weather[0].main + ' Night';
 	} else {
 		newForecastObject.weatherMain = forecastObject.weather[0].main;
