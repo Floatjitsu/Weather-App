@@ -4,6 +4,7 @@ import DateHandler from '../modules/dateHandler.js';
 import weatherData from '../modules/weatherData';
 import WeatherForecastTimes from './WeatherForecastTimes';
 import Helper from '../modules/helperFunctions';
+import Typography from '@material-ui/core/Typography';
 
 const dateHandler = new DateHandler();
 const timeValues = {
@@ -112,10 +113,26 @@ class WeatherComponent extends React.Component {
 					<Tabs
 						value={this.state.selectedTabNumber}
 						onChange={this.handleTabChange.bind(this)}>
-						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getTommorowsDate()}/>
-						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getTwoDaysAfterTodaysDate()} />
-						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getThreeDaysAfterTodaysDate()} />
-						<Tab style={{whiteSpace: 'pre-line'}} label={dateHandler.getFourDaysAfterTodaysDate()} />
+						<Tab label={
+								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+									{dateHandler.getTommorowsDate()}
+								</Typography>
+							}/>
+						<Tab label={
+								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+									{dateHandler.getTwoDaysAfterTodaysDate()}
+								</Typography>
+							}/>
+						<Tab label={
+								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+									{dateHandler.getThreeDaysAfterTodaysDate()}
+								</Typography>
+							}/>
+						<Tab label={
+								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+									{dateHandler.getFourDaysAfterTodaysDate()}
+								</Typography>
+							}/>
 					</Tabs>
 				</AppBar>
 				<div className='weatherForecastList'>
