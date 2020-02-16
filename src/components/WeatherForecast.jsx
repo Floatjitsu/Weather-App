@@ -71,6 +71,7 @@ class WeatherComponent extends React.Component {
 	}
 
 	setForecastList = () => {
+		this.resetForecastList();
 		const forecast = weatherData.getWeatherForecastForCityDate(
 			this.props.value, this.state.selectedDay);
 		for (const forecastItem of forecast) {
@@ -106,6 +107,13 @@ class WeatherComponent extends React.Component {
 		this.setState({forecastList: forecastList});
 	}
 
+	resetForecastList = () => {
+		const resettedForecastList = {
+			threeAm: {}, nineAm: {}, threePm: {}, ninePm: {}
+		};
+		this.setState({forecastList: resettedForecastList});
+	}
+
 	render() {
 		return (
 			<div>
@@ -114,27 +122,27 @@ class WeatherComponent extends React.Component {
 						value={this.state.selectedTabNumber}
 						onChange={this.handleTabChange.bind(this)}>
 						<Tab label= {
-							<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
-								{dateHandler.getTodaysDate()}
-							</Typography>
+								<Typography variant='caption' style={{whiteSpace: 'pre-line'}}>
+									{dateHandler.getTodaysDate()}
+								</Typography>
 							}/>
 						<Tab label={
-								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+								<Typography variant='caption' style={{whiteSpace: 'pre-line'}}>
 									{dateHandler.getTommorowsDate()}
 								</Typography>
 							}/>
 						<Tab label={
-								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+								<Typography variant='caption' style={{whiteSpace: 'pre-line'}}>
 									{dateHandler.getTwoDaysAfterTodaysDate()}
 								</Typography>
 							}/>
 						<Tab label={
-								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+								<Typography variant='caption' style={{whiteSpace: 'pre-line'}}>
 									{dateHandler.getThreeDaysAfterTodaysDate()}
 								</Typography>
 							}/>
 						<Tab label={
-								<Typography variant='headline' style={{whiteSpace: 'pre-line'}}>
+								<Typography variant='caption' style={{whiteSpace: 'pre-line'}}>
 									{dateHandler.getFourDaysAfterTodaysDate()}
 								</Typography>
 							}/>
