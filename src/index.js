@@ -8,6 +8,8 @@ import AboutComponent from './components/AboutComponent';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 
+// console.log(process.env.REACT_APP_KEY);
+
 class App extends React.Component {
 	state = {
 		city: ''

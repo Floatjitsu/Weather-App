@@ -4,7 +4,7 @@ const apiUrl = 'https://api.openweathermap.org/data/2.5/';
 const currentWeatherUrlParam = 'weather';
 const forecastWeatherUrlParam = 'forecast';
 const metricUnitUrlParam = 'metric'; // To get temperature in C°
-const apiKey = '63adac7ad2e70d880b81ccda4407faeb';
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 const forecastTimes = ['03:00', '09:00', '15:00', '21:00'];
 let weatherForecastForCity = {};
 
